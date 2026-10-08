@@ -1,0 +1,1521 @@
+{
+  "description": "LIDC-IDRI VISTA3D patient-level cross-validation",
+  "training": [
+    {
+      "patient_id": "LIDC-IDRI-0855",
+      "scan_id": "800",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0855__scan800.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0855__scan800__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0129",
+      "scan_id": "133",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0129__scan133.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0129__scan133__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0102",
+      "scan_id": "109",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0102__scan109.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0102__scan109__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0741",
+      "scan_id": "914",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0741__scan914.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0741__scan914__consensus.nii.gz"
+    }
+  ],
+  "validation": [
+    {
+      "patient_id": "LIDC-IDRI-0576",
+      "scan_id": "582",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0576__scan582.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0576__scan582__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0013",
+      "scan_id": "24",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0013__scan24.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0013__scan24__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0615",
+      "scan_id": "620",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0615__scan620.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0615__scan620__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0328",
+      "scan_id": "330",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0328__scan330.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0328__scan330__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0834",
+      "scan_id": "821",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0834__scan821.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0834__scan821__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0494",
+      "scan_id": "500",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0494__scan500.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0494__scan500__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0537",
+      "scan_id": "543",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0537__scan543.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0537__scan543__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0509",
+      "scan_id": "515",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0509__scan515.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0509__scan515__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0835",
+      "scan_id": "820",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0835__scan820.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0835__scan820__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0213",
+      "scan_id": "214",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0213__scan214.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0213__scan214__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0158",
+      "scan_id": "159",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0158__scan159.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0158__scan159__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-1007",
+      "scan_id": "648",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-1007__scan648.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-1007__scan648__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0088",
+      "scan_id": "96",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0088__scan96.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0088__scan96__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0769",
+      "scan_id": "886",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0769__scan886.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0769__scan886__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0762",
+      "scan_id": "893",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0762__scan893.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0762__scan893__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0660",
+      "scan_id": "995",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0660__scan995.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0660__scan995__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0943",
+      "scan_id": "712",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0943__scan712.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0943__scan712__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0159",
+      "scan_id": "160",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0159__scan160.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0159__scan160__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0082",
+      "scan_id": "90",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0082__scan90.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0082__scan90__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0229",
+      "scan_id": "230",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0229__scan230.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0229__scan230__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0997",
+      "scan_id": "658",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0997__scan658.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0997__scan658__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0580",
+      "scan_id": "586",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0580__scan586.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0580__scan586__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0783",
+      "scan_id": "872",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0783__scan872.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0783__scan872__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0191",
+      "scan_id": "192",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0191__scan192.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0191__scan192__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0905",
+      "scan_id": "750",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0905__scan750.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0905__scan750__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0752",
+      "scan_id": "903",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0752__scan903.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0752__scan903__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0980",
+      "scan_id": "675",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0980__scan675.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0980__scan675__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0209",
+      "scan_id": "210",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0209__scan210.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0209__scan210__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0099",
+      "scan_id": "107",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0099__scan107.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0099__scan107__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0202",
+      "scan_id": "203",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0202__scan203.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0202__scan203__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0172",
+      "scan_id": "173",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0172__scan173.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0172__scan173__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0559",
+      "scan_id": "565",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0559__scan565.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0559__scan565__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0466",
+      "scan_id": "471",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0466__scan471.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0466__scan471__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0538",
+      "scan_id": "544",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0538__scan544.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0538__scan544__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0669",
+      "scan_id": "986",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0669__scan986.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0669__scan986__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0140",
+      "scan_id": "143",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0140__scan143.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0140__scan143__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0617",
+      "scan_id": "622",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0617__scan622.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0617__scan622__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0452",
+      "scan_id": "457",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0452__scan457.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0452__scan457__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0246",
+      "scan_id": "246",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0246__scan246.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0246__scan246__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0986",
+      "scan_id": "669",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0986__scan669.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0986__scan669__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0858",
+      "scan_id": "797",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0858__scan797.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0858__scan797__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0932",
+      "scan_id": "723",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0932__scan723.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0932__scan723__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0866",
+      "scan_id": "789",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0866__scan789.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0866__scan789__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0408",
+      "scan_id": "412",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0408__scan412.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0408__scan412__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0394",
+      "scan_id": "398",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0394__scan398.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0394__scan398__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0211",
+      "scan_id": "212",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0211__scan212.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0211__scan212__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0385",
+      "scan_id": "389",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0385__scan389.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0385__scan389__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0547",
+      "scan_id": "553",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0547__scan553.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0547__scan553__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0367",
+      "scan_id": "371",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0367__scan371.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0367__scan371__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0228",
+      "scan_id": "229",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0228__scan229.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0228__scan229__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0208",
+      "scan_id": "209",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0208__scan209.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0208__scan209__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0064",
+      "scan_id": "75",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0064__scan75.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0064__scan75__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0981",
+      "scan_id": "674",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0981__scan674.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0981__scan674__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0717",
+      "scan_id": "938",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0717__scan938.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0717__scan938__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0775",
+      "scan_id": "880",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0775__scan880.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0775__scan880__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0770",
+      "scan_id": "885",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0770__scan885.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0770__scan885__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0651",
+      "scan_id": "1004",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0651__scan1004.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0651__scan1004__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0030",
+      "scan_id": "41",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0030__scan41.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0030__scan41__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0803",
+      "scan_id": "852",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0803__scan852.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0803__scan852__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0332",
+      "scan_id": "334",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0332__scan334.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0332__scan334__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0639",
+      "scan_id": "1016",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0639__scan1016.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0639__scan1016__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0240",
+      "scan_id": "240",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0240__scan240.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0240__scan240__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0237",
+      "scan_id": "238",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0237__scan238.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0237__scan238__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0728",
+      "scan_id": "927",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0728__scan927.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0728__scan927__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0875",
+      "scan_id": "780",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0875__scan780.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0875__scan780__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0942",
+      "scan_id": "713",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0942__scan713.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0942__scan713__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0125",
+      "scan_id": "130",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0125__scan130.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0125__scan130__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0109",
+      "scan_id": "116",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0109__scan116.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0109__scan116__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0122",
+      "scan_id": "127",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0122__scan127.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0122__scan127__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0817",
+      "scan_id": "838",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0817__scan838.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0817__scan838__consensus.nii.gz"
+    }
+  ],
+  "testing": [
+    {
+      "patient_id": "LIDC-IDRI-0005",
+      "scan_id": "16",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0005__scan16.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0005__scan16__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0009",
+      "scan_id": "20",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0009__scan20.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0009__scan20__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0010",
+      "scan_id": "21",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0010__scan21.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0010__scan21__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0015",
+      "scan_id": "26",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0015__scan26.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0015__scan26__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0037",
+      "scan_id": "48",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0037__scan48.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0037__scan48__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0039",
+      "scan_id": "50",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0039__scan50.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0039__scan50__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0043",
+      "scan_id": "54",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0043__scan54.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0043__scan54__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0049",
+      "scan_id": "60",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0049__scan60.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0049__scan60__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0056",
+      "scan_id": "67",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0056__scan67.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0056__scan67__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0063",
+      "scan_id": "74",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0063__scan74.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0063__scan74__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0065",
+      "scan_id": "76",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0065__scan76.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0065__scan76__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0067",
+      "scan_id": "78",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0067__scan78.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0067__scan78__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0072",
+      "scan_id": "82",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0072__scan82.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0072__scan82__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0078",
+      "scan_id": "1",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0078__scan1.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0078__scan1__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0083",
+      "scan_id": "91",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0083__scan91.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0083__scan91__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0086",
+      "scan_id": "94",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0086__scan94.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0086__scan94__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0090",
+      "scan_id": "98",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0090__scan98.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0090__scan98__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0091",
+      "scan_id": "99",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0091__scan99.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0091__scan99__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0092",
+      "scan_id": "100",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0092__scan100.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0092__scan100__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0096",
+      "scan_id": "104",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0096__scan104.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0096__scan104__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0104",
+      "scan_id": "111",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0104__scan111.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0104__scan111__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0105",
+      "scan_id": "112",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0105__scan112.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0105__scan112__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0118",
+      "scan_id": "123",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0118__scan123.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0118__scan123__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0121",
+      "scan_id": "126",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0121__scan126.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0121__scan126__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0128",
+      "scan_id": "132",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0128__scan132.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0128__scan132__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0130",
+      "scan_id": "134",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0130__scan134.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0130__scan134__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0133",
+      "scan_id": "137",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0133__scan137.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0133__scan137__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0135",
+      "scan_id": "139",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0135__scan139.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0135__scan139__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0142",
+      "scan_id": "145",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0142__scan145.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0142__scan145__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0147",
+      "scan_id": "150",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0147__scan150.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0147__scan150__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0149",
+      "scan_id": "152",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0149__scan152.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0149__scan152__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0154",
+      "scan_id": "11",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0154__scan11.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0154__scan11__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0155",
+      "scan_id": "156",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0155__scan156.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0155__scan156__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0156",
+      "scan_id": "157",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0156__scan157.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0156__scan157__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0163",
+      "scan_id": "164",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0163__scan164.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0163__scan164__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0171",
+      "scan_id": "172",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0171__scan172.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0171__scan172__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0173",
+      "scan_id": "174",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0173__scan174.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0173__scan174__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0175",
+      "scan_id": "176",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0175__scan176.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0175__scan176__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0178",
+      "scan_id": "179",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0178__scan179.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0178__scan179__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0179",
+      "scan_id": "180",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0179__scan180.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0179__scan180__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0180",
+      "scan_id": "181",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0180__scan181.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0180__scan181__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0186",
+      "scan_id": "187",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0186__scan187.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0186__scan187__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0190",
+      "scan_id": "191",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0190__scan191.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0190__scan191__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0193",
+      "scan_id": "194",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0193__scan194.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0193__scan194__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0210",
+      "scan_id": "211",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0210__scan211.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0210__scan211__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0215",
+      "scan_id": "216",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0215__scan216.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0215__scan216__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0217",
+      "scan_id": "218",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0217__scan218.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0217__scan218__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0222",
+      "scan_id": "223",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0222__scan223.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0222__scan223__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0223",
+      "scan_id": "224",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0223__scan224.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0223__scan224__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0227",
+      "scan_id": "228",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0227__scan228.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0227__scan228__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0242",
+      "scan_id": "242",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0242__scan242.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0242__scan242__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0243",
+      "scan_id": "243",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0243__scan243.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0243__scan243__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0259",
+      "scan_id": "259",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0259__scan259.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0259__scan259__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0268",
+      "scan_id": "268",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0268__scan268.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0268__scan268__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0280",
+      "scan_id": "280",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0280__scan280.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0280__scan280__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0283",
+      "scan_id": "283",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0283__scan283.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0283__scan283__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0284",
+      "scan_id": "284",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0284__scan284.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0284__scan284__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0291",
+      "scan_id": "291",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0291__scan291.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0291__scan291__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0296",
+      "scan_id": "296",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0296__scan296.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0296__scan296__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0298",
+      "scan_id": "298",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0298__scan298.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0298__scan298__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0301",
+      "scan_id": "301",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0301__scan301.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0301__scan301__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0302",
+      "scan_id": "302",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0302__scan302.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0302__scan302__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0314",
+      "scan_id": "314",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0314__scan314.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0314__scan314__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0323",
+      "scan_id": "324",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0323__scan324.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0323__scan324__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0326",
+      "scan_id": "327",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0326__scan327.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0326__scan327__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0329",
+      "scan_id": "329",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0329__scan329.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0329__scan329__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0339",
+      "scan_id": "341",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0339__scan341.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0339__scan341__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0340",
+      "scan_id": "342",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0340__scan342.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0340__scan342__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0343",
+      "scan_id": "345",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0343__scan345.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0343__scan345__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0344",
+      "scan_id": "346",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0344__scan346.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0344__scan346__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0346",
+      "scan_id": "348",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0346__scan348.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0346__scan348__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0348",
+      "scan_id": "350",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0348__scan350.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0348__scan350__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0350",
+      "scan_id": "352",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0350__scan352.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0350__scan352__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0356",
+      "scan_id": "359",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0356__scan359.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0356__scan359__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0359",
+      "scan_id": "362",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0359__scan362.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0359__scan362__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0369",
+      "scan_id": "373",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0369__scan373.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0369__scan373__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0373",
+      "scan_id": "377",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0373__scan377.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0373__scan377__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0390",
+      "scan_id": "394",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0390__scan394.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0390__scan394__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0396",
+      "scan_id": "400",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0396__scan400.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0396__scan400__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0399",
+      "scan_id": "403",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0399__scan403.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0399__scan403__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0404",
+      "scan_id": "408",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0404__scan408.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0404__scan408__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0405",
+      "scan_id": "409",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0405__scan409.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0405__scan409__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0421",
+      "scan_id": "425",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0421__scan425.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0421__scan425__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0427",
+      "scan_id": "431",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0427__scan431.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0427__scan431__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0430",
+      "scan_id": "434",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0430__scan434.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0430__scan434__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0439",
+      "scan_id": "443",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0439__scan443.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0439__scan443__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0440",
+      "scan_id": "444",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0440__scan444.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0440__scan444__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0443",
+      "scan_id": "448",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0443__scan448.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0443__scan448__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0444",
+      "scan_id": "449",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0444__scan449.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0444__scan449__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0447",
+      "scan_id": "452",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0447__scan452.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0447__scan452__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0463",
+      "scan_id": "468",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0463__scan468.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0463__scan468__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0464",
+      "scan_id": "469",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0464__scan469.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0464__scan469__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0476",
+      "scan_id": "481",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0476__scan481.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0476__scan481__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0483",
+      "scan_id": "488",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0483__scan488.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0483__scan488__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0488",
+      "scan_id": "494",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0488__scan494.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0488__scan494__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0501",
+      "scan_id": "507",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0501__scan507.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0501__scan507__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0504",
+      "scan_id": "510",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0504__scan510.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0504__scan510__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0505",
+      "scan_id": "511",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0505__scan511.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0505__scan511__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0516",
+      "scan_id": "522",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0516__scan522.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0516__scan522__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0521",
+      "scan_id": "527",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0521__scan527.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0521__scan527__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0532",
+      "scan_id": "538",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0532__scan538.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0532__scan538__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0533",
+      "scan_id": "539",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0533__scan539.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0533__scan539__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0539",
+      "scan_id": "545",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0539__scan545.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0539__scan545__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0541",
+      "scan_id": "547",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0541__scan547.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0541__scan547__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0546",
+      "scan_id": "552",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0546__scan552.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0546__scan552__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0552",
+      "scan_id": "558",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0552__scan558.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0552__scan558__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0562",
+      "scan_id": "568",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0562__scan568.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0562__scan568__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0571",
+      "scan_id": "577",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0571__scan577.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0571__scan577__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0583",
+      "scan_id": "589",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0583__scan589.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0583__scan589__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0584",
+      "scan_id": "590",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0584__scan590.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0584__scan590__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0587",
+      "scan_id": "592",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0587__scan592.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0587__scan592__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0588",
+      "scan_id": "593",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0588__scan593.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0588__scan593__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0595",
+      "scan_id": "600",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0595__scan600.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0595__scan600__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0606",
+      "scan_id": "611",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0606__scan611.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0606__scan611__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0609",
+      "scan_id": "614",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0609__scan614.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0609__scan614__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0624",
+      "scan_id": "629",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0624__scan629.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0624__scan629__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0630",
+      "scan_id": "635",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0630__scan635.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0630__scan635__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0644",
+      "scan_id": "1011",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0644__scan1011.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0644__scan1011__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0649",
+      "scan_id": "1006",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0649__scan1006.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0649__scan1006__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0663",
+      "scan_id": "992",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0663__scan992.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0663__scan992__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0666",
+      "scan_id": "989",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0666__scan989.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0666__scan989__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0670",
+      "scan_id": "985",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0670__scan985.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0670__scan985__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0674",
+      "scan_id": "981",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0674__scan981.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0674__scan981__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0676",
+      "scan_id": "979",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0676__scan979.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0676__scan979__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0686",
+      "scan_id": "969",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0686__scan969.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0686__scan969__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0688",
+      "scan_id": "967",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0688__scan967.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0688__scan967__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0693",
+      "scan_id": "962",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0693__scan962.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0693__scan962__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0708",
+      "scan_id": "947",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0708__scan947.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0708__scan947__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0709",
+      "scan_id": "946",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0709__scan946.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0709__scan946__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0719",
+      "scan_id": "936",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0719__scan936.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0719__scan936__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0720",
+      "scan_id": "935",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0720__scan935.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0720__scan935__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0721",
+      "scan_id": "934",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0721__scan934.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0721__scan934__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0722",
+      "scan_id": "933",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0722__scan933.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0722__scan933__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0723",
+      "scan_id": "932",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0723__scan932.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0723__scan932__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0726",
+      "scan_id": "929",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0726__scan929.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0726__scan929__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0732",
+      "scan_id": "923",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0732__scan923.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0732__scan923__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0739",
+      "scan_id": "916",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0739__scan916.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0739__scan916__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0748",
+      "scan_id": "907",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0748__scan907.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0748__scan907__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0751",
+      "scan_id": "904",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0751__scan904.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0751__scan904__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0754",
+      "scan_id": "901",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0754__scan901.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0754__scan901__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0756",
+      "scan_id": "899",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0756__scan899.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0756__scan899__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0758",
+      "scan_id": "897",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0758__scan897.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0758__scan897__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0759",
+      "scan_id": "896",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0759__scan896.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0759__scan896__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0766",
+      "scan_id": "889",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0766__scan889.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0766__scan889__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0772",
+      "scan_id": "883",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0772__scan883.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0772__scan883__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0780",
+      "scan_id": "875",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0780__scan875.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0780__scan875__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0782",
+      "scan_id": "873",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0782__scan873.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0782__scan873__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0786",
+      "scan_id": "869",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0786__scan869.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0786__scan869__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0787",
+      "scan_id": "868",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0787__scan868.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0787__scan868__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0790",
+      "scan_id": "865",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0790__scan865.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0790__scan865__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0793",
+      "scan_id": "862",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0793__scan862.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0793__scan862__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0797",
+      "scan_id": "858",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0797__scan858.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0797__scan858__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0810",
+      "scan_id": "845",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0810__scan845.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0810__scan845__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0814",
+      "scan_id": "841",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0814__scan841.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0814__scan841__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0824",
+      "scan_id": "831",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0824__scan831.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0824__scan831__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0827",
+      "scan_id": "828",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0827__scan828.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0827__scan828__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0829",
+      "scan_id": "826",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0829__scan826.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0829__scan826__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0838",
+      "scan_id": "817",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0838__scan817.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0838__scan817__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0841",
+      "scan_id": "814",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0841__scan814.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0841__scan814__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0849",
+      "scan_id": "806",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0849__scan806.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0849__scan806__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0857",
+      "scan_id": "798",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0857__scan798.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0857__scan798__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0872",
+      "scan_id": "783",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0872__scan783.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0872__scan783__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0902",
+      "scan_id": "753",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0902__scan753.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0902__scan753__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0908",
+      "scan_id": "747",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0908__scan747.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0908__scan747__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0915",
+      "scan_id": "740",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0915__scan740.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0915__scan740__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0923",
+      "scan_id": "732",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0923__scan732.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0923__scan732__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0928",
+      "scan_id": "727",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0928__scan727.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0928__scan727__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0935",
+      "scan_id": "720",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0935__scan720.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0935__scan720__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0941",
+      "scan_id": "714",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0941__scan714.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0941__scan714__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0956",
+      "scan_id": "699",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0956__scan699.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0956__scan699__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0957",
+      "scan_id": "698",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0957__scan698.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0957__scan698__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0961",
+      "scan_id": "694",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0961__scan694.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0961__scan694__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0965",
+      "scan_id": "690",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0965__scan690.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0965__scan690__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0987",
+      "scan_id": "668",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0987__scan668.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0987__scan668__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-0994",
+      "scan_id": "661",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0994__scan661.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-0994__scan661__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-1001",
+      "scan_id": "654",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-1001__scan654.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-1001__scan654__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-1004",
+      "scan_id": "651",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-1004__scan651.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-1004__scan651__consensus.nii.gz"
+    },
+    {
+      "patient_id": "LIDC-IDRI-1010",
+      "scan_id": "645",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-1010__scan645.nii.gz",
+      "label": "/home/users/yj255/code/imaging_feature/vista3D/data/consensus_labels/LIDC-IDRI-1010__scan645__consensus.nii.gz"
+    }
+  ]
+}

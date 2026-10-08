@@ -1,0 +1,13 @@
+在V4模型中，我们将做如下改动：
+
+在V3模型中，我们得到了segmentation之后，我们就同时计算radiomics和semantic features，然后把它们同时放入fasterrisk进行分析。在V4模型中，我们不再同时计算radiomics和semantic。而是先计算radiomics features并且拟合一个malignant-radiomics features的logistic模型，然后计算这个模型的residual（即risk(total)-risk(radiomics)）。然后再计算semantic features，用semantic features加上后续的fasterrisk对residual进行建模。整个逻辑链条为，先用radiomics feature（包括length、volume等）对malignancy进行建模，再用semantic features对前面无法解释的部分进行建模。
+
+另外，V4模型还会在V3模型的loss的基础上额外加上一个missing nodule penalty。因为，在radiology的分析中，多检测出一个结节的问题通常不是很大，甚至能额外告诉医生“这个区域可能包含某种信息”。但少检测一个nodule的问题就很大了，它可能让医生错过一个致命的信息。所以，我们需要对missing nodule进行额外的惩罚。
+
+MedicalNet 的语义分支使用 GroupNorm，并对卷积核逐输出通道做权重标准化。直接将预训练 BatchNorm 换成 GroupNorm 会使结节之间的差异在深层逐渐消失；权重标准化用于修复这种退化。
+
+还有，我们将对V4的训练进行修改。首先就是loss function。V4删去了radiomics loss、object loss, 并且将ordinal loss 更名为semantic loss。然后，在训练开始前，先用官方的mask和官方的features对MedicalNet、malignancy model进行warmup，随后再正式开始训练。
+
+V4的训练同样通过wandb进行监控。
+
+V4模型的其他结构将与V3保持一致。我们也将在V4使用learning rate的annealing schedule。但先不对temperature parameter做annealing schedule。

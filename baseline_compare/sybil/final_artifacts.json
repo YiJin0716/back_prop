@@ -1,0 +1,33 @@
+{
+  "training_and_inference_verified": true,
+  "model": "sybil",
+  "cohort_sha256": "b8e93f42139719fb762c5de14933d6ea8feb91430f741ed2d9900f2df3fcd22f",
+  "training_scans": 638,
+  "endpoint": "LIDC reader-derived current malignancy",
+  "held_out_performance_evaluated": false,
+  "training_audits": {
+    "sybil": {
+      "verified": true,
+      "job_id": 12620985,
+      "epochs": 3,
+      "training_scans": 638,
+      "samples_per_epoch": 638,
+      "cohort_sha256": "b8e93f42139719fb762c5de14933d6ea8feb91430f741ed2d9900f2df3fcd22f",
+      "finite_weights_and_optimizer": true,
+      "checkpoint_sha256": "bcd62d4af320111af4f521e36e77575067806d88429a3f3ad82a151f53e4b8c7",
+      "final_loss": 2.987100084502028,
+      "expected_optimizer_steps": 1914,
+      "adam_step_counter": 1914
+    }
+  },
+  "inference_verifications": {
+    "whole_ct": "/usr/project/rudinlab/datasets/LIDC_IDRI/joint_model/baseline_compare/sybil/12620985/whole_ct_verification.json"
+  },
+  "artifacts": {
+    "classifier": {
+      "path": "/usr/project/rudinlab/datasets/LIDC_IDRI/joint_model/baseline_compare/sybil/12620985/last.pt",
+      "link": "/home/users/yj255/code/imaging_feature/back_prop/baseline_compare/sybil/finetuned.pt",
+      "sha256": "bcd62d4af320111af4f521e36e77575067806d88429a3f3ad82a151f53e4b8c7"
+    }
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "reason": "Reuse the already completed fold 0, as clarified by user; do not retrain it.",
+  "jobs": {
+    "f0-v3": {
+      "job_id": "12660729",
+      "stage": "v3",
+      "fold": 0,
+      "dependencies": [],
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=cv-f0-v3",
+        "--output=/home/users/yj255/code/imaging_feature/back_prop/baseline_compare/cross_validation/logs/f0-v3_%j.out",
+        "--error=/home/users/yj255/code/imaging_feature/back_prop/baseline_compare/cross_validation/logs/f0-v3_%j.err",
+        "--gres=gpu:a5000:4",
+        "--cpus-per-task=16",
+        "--mem=192G",
+        "--time=7-00:00:00",
+        "/home/users/yj255/code/imaging_feature/back_prop/baseline_compare/cross_validation/job.sbatch",
+        "v3",
+        "0"
+      ]
+    },
+    "f0-sybil": {
+      "job_id": "12660753",
+      "stage": "sybil",
+      "fold": 0,
+      "dependencies": [
+        "12660728"
+      ],
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=cv-f0-sybil",
+        "--output=/home/users/yj255/code/imaging_feature/back_prop/baseline_compare/cross_validation/logs/f0-sybil_%j.out",
+        "--error=/home/users/yj255/code/imaging_feature/back_prop/baseline_compare/cross_validation/logs/f0-sybil_%j.err",
+        "--gres=gpu:a5000:1",
+        "--dependency=afterok:12660728",
+        "--kill-on-invalid-dep=yes",
+        "/home/users/yj255/code/imaging_feature/back_prop/baseline_compare/cross_validation/job.sbatch",
+        "sybil",
+        "0"
+      ]
+    },
+    "f0-detector": {
+      "job_id": "12660754",
+      "stage": "detector",
+      "fold": 0,
+      "dependencies": [
+        "12660728"
+      ],
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=cv-f0-detector",
+        "--output=/home/users/yj255/code/imaging_feature/back_prop/baseline_compare/cross_validation/logs/f0-detector_%j.out",
+        "--error=/home/users/yj255/code/imaging_feature/back_prop/baseline_compare/cross_validation/logs/f0-detector_%j.err",
+        "--gres=gpu:a5000:1",
+        "--dependency=afterok:12660728",
+        "--kill-on-invalid-dep=yes",
+        "/home/users/yj255/code/imaging_feature/back_prop/baseline_compare/cross_validation/job.sbatch",
+        "detector",
+        "0"
+      ]
+    },
+    "f0-classifier": {
+      "job_id": "12660755",
+      "stage": "classifier",
+      "fold": 0,
+      "dependencies": [
+        "12660728"
+      ],
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=cv-f0-classifier",
+        "--output=/home/users/yj255/code/imaging_feature/back_prop/baseline_compare/cross_validation/logs/f0-classifier_%j.out",
+        "--error=/home/users/yj255/code/imaging_feature/back_prop/baseline_compare/cross_validation/logs/f0-classifier_%j.err",
+        "--gres=gpu:a5000:1",
+        "--dependency=afterok:12660728",
+        "--kill-on-invalid-dep=yes",
+        "/home/users/yj255/code/imaging_feature/back_prop/baseline_compare/cross_validation/job.sbatch",
+        "classifier",
+        "0"
+      ]
+    },
+    "f0-proposals": {
+      "job_id": "12660756",
+      "stage": "proposals",
+      "fold": 0,
+      "dependencies": [
+        "12660754"
+      ],
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=cv-f0-proposals",
+        "--output=/home/users/yj255/code/imaging_feature/back_prop/baseline_compare/cross_validation/logs/f0-proposals_%j.out",
+        "--error=/home/users/yj255/code/imaging_feature/back_prop/baseline_compare/cross_validation/logs/f0-proposals_%j.err",
+        "--gres=gpu:a5000:1",
+        "--dependency=afterok:12660754",
+        "--kill-on-invalid-dep=yes",
+        "/home/users/yj255/code/imaging_feature/back_prop/baseline_compare/cross_validation/job.sbatch",
+        "proposals",
+        "0"
+      ]
+    },
+    "f0-adapt": {
+      "job_id": "12660757",
+      "stage": "adapt",
+      "fold": 0,
+      "dependencies": [
+        "12660755",
+        "12660756"
+      ],
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=cv-f0-adapt",
+        "--output=/home/users/yj255/code/imaging_feature/back_prop/baseline_compare/cross_validation/logs/f0-adapt_%j.out",
+        "--error=/home/users/yj255/code/imaging_feature/back_prop/baseline_compare/cross_validation/logs/f0-adapt_%j.err",
+        "--gres=gpu:a5000:1",
+        "--dependency=afterok:12660755:12660756",
+        "--kill-on-invalid-dep=yes",
+        "/home/users/yj255/code/imaging_feature/back_prop/baseline_compare/cross_validation/job.sbatch",
+        "adapt",
+        "0"
+      ]
+    },
+    "f0-evaluate": {
+      "job_id": "12660758",
+      "stage": "evaluate",
+      "fold": 0,
+      "dependencies": [
+        "12660729",
+        "12660753",
+        "12660757"
+      ],
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=cv-f0-evaluate",
+        "--output=/home/users/yj255/code/imaging_feature/back_prop/baseline_compare/cross_validation/logs/f0-evaluate_%j.out",
+        "--error=/home/users/yj255/code/imaging_feature/back_prop/baseline_compare/cross_validation/logs/f0-evaluate_%j.err",
+        "--gres=gpu:a5000:1",
+        "--dependency=afterok:12660729:12660753:12660757",
+        "--kill-on-invalid-dep=yes",
+        "/home/users/yj255/code/imaging_feature/back_prop/baseline_compare/cross_validation/job.sbatch",
+        "evaluate",
+        "0"
+      ]
+    }
+  }
+}

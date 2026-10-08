@@ -1,0 +1,113 @@
+{
+  "repositories": [
+    {
+      "path": "sybil/upstream",
+      "url": "https://github.com/reginabarzilaygroup/Sybil.git",
+      "commit": "d9fc81b93c1c6239a570c1c570c1f2a2e6266a4a",
+      "working_tree_clean": true
+    },
+    {
+      "path": "deeplung/upstream",
+      "url": "https://github.com/wentaozhu/DeepLung.git",
+      "commit": "0fedeae87f332f7c95786dd15c9753a891dce26a",
+      "working_tree_clean": true
+    },
+    {
+      "path": "edicnet/hscnn_upstream",
+      "url": "https://github.com/sincewhenUCLA/Interpretable-Deep-Hierarchical-Semantic-Convolutional-Neural-Network-HSCNN.git",
+      "commit": "ffe5d2b428e542dfb86a36ef85ff11e53180662f",
+      "working_tree_clean": true
+    },
+    {
+      "path": "edicnet/retinanet_upstream",
+      "url": "https://github.com/yhenon/pytorch-retinanet.git",
+      "commit": "0348a9d57b279e3b5b235461b472d37da5feec3d",
+      "working_tree_clean": true
+    }
+  ],
+  "weights": [
+    {
+      "path": "sybil/weights/28a7cd44f5bcd3e6cc760b65c7e0d54d.ckpt",
+      "bytes": 149559985,
+      "sha256": "40c9a46c45b8d32b23b52ed75182d7e1886746796476feb07a2767db86947251"
+    },
+    {
+      "path": "sybil/weights/56ce1a7d241dc342982f5466c4a9d7ef.ckpt",
+      "bytes": 149560561,
+      "sha256": "d4802c8b66511e7a4261c501dac2d8d6887103c11f58587cc7a3ce796a5f0f9e"
+    },
+    {
+      "path": "sybil/weights/64a91b25f84141d32852e75a3aec7305.ckpt",
+      "bytes": 149560561,
+      "sha256": "f66c956e56f0cf1ce90baf08738be3b87fef365399c7b468033e028c7b5d7235"
+    },
+    {
+      "path": "sybil/weights/65fd1f04cb4c5847d86a9ed8ba31ac1a.ckpt",
+      "bytes": 149560561,
+      "sha256": "313bff54241dde0ebc4cd9b884bc3910e1b5497e37b8659199577e81f4cdd6c2"
+    },
+    {
+      "path": "sybil/weights/624407ef8e3a2a009f9fa51f9846fe9a.ckpt",
+      "bytes": 149560561,
+      "sha256": "622482b897994e1daa95be133d928421571ed4c1fa1c3a9b006e68b7cdd7a90d"
+    },
+    {
+      "path": "deeplung/upstream/detector/dpnmodel/fd0066.ckpt",
+      "bytes": 5507918,
+      "sha256": "1471097384a5fc45420873afbebda6e86ddcb04b923f8a2640ff66dab622bb2c"
+    },
+    {
+      "path": "deeplung/upstream/detector/dpnmodel/fd1022.ckpt",
+      "bytes": 5507925,
+      "sha256": "41b76ea793beb4ddd9994cad03b5347ac61aed8b39a323b9c1c2fc637ebb3654"
+    },
+    {
+      "path": "deeplung/upstream/detector/dpnmodel/fd2093.ckpt",
+      "bytes": 5507918,
+      "sha256": "c75ab02308e6debc4cc06b0d6422651e65560ac13b551a7b6da9d7b8fcb2ad2a"
+    },
+    {
+      "path": "deeplung/upstream/detector/dpnmodel/fd3044.ckpt",
+      "bytes": 5507921,
+      "sha256": "8c7a93e882a18790ab144e60b01ea707dd2b8f25c804bead591e80a303fa1f8a"
+    },
+    {
+      "path": "deeplung/upstream/detector/dpnmodel/fd4007.ckpt",
+      "bytes": 5507921,
+      "sha256": "832bf6eb1d2a5e4c1ffd2a25cce24e4f42c09fdc5064d526c10e4d9d05285d1a"
+    },
+    {
+      "path": "deeplung/upstream/detector/dpnmodel/fd5076.ckpt",
+      "bytes": 5507918,
+      "sha256": "e45d5370bd0197f58d261af88c7171558d92b89c170ee35bf8b4c6b3c95f8360"
+    },
+    {
+      "path": "deeplung/upstream/detector/dpnmodel/fd6083.ckpt",
+      "bytes": 5507918,
+      "sha256": "5ea67731ac82df4f6297389b0d3bf161a881c66a3b8de0951792116c009df115"
+    },
+    {
+      "path": "deeplung/upstream/detector/dpnmodel/fd7072.ckpt",
+      "bytes": 5507925,
+      "sha256": "7cb972b6f03b8833dc0214f6741cd021c9e7f6adb10e498056930d8ef6964972"
+    },
+    {
+      "path": "deeplung/upstream/detector/dpnmodel/fd8004.ckpt",
+      "bytes": 5507921,
+      "sha256": "1dcf61c5d7d35f8ce41d19b9903c76d234c551f4455006e00e09c3d27d5cf8e3"
+    },
+    {
+      "path": "deeplung/upstream/detector/dpnmodel/fd9044.ckpt",
+      "bytes": 5507918,
+      "sha256": "aca91d3c55e88d8d8d6ca002a21d1601d88e0f3e39786e2654b0cf667c824b0d"
+    },
+    {
+      "path": "edicnet/weights/resnet34-333f7ec4.pth",
+      "bytes": 87306240,
+      "sha256": "333f7ec4c6338da2cbed37f1fc0445f9624f1355633fa1d7eab79a91084c6cef"
+    }
+  ],
+  "sybil_download": "https://github.com/reginabarzilaygroup/Sybil/releases/download/v1.5.0/sybil_checkpoints.zip",
+  "resnet34_download": "https://download.pytorch.org/models/resnet34-333f7ec4.pth",
+  "edicnet_paper": "https://par.nsf.gov/servlets/purl/10179555"
+}

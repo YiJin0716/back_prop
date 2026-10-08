@@ -1,0 +1,202 @@
+{
+  "back_prop/baseline_compare/cohort.py": {
+    "after": "eac08f7a302caeea25eb7be33cb9858ec52480378ace9aa7ee4bb7a82c80a540",
+    "before": "7c3f0496e3058295e90a53420a572f18d03ebbe440de2d6f0f9e52edb750cd78",
+    "path": "back_prop/baseline_compare/cohort.py"
+  },
+  "back_prop/baseline_compare/evaluate_roc.py": {
+    "after": "6641ca926ed0d16b6dc7385b0d5315e6daef221cd09baf4be899c17ead59260b",
+    "before": "b4b11299b4b7c23a0c0239858606ebbf945c63490089a5c7241234888738f101",
+    "path": "back_prop/baseline_compare/evaluate_roc.py"
+  },
+  "back_prop/baseline_compare/prepare.py": {
+    "after": "392afde7c01e2833f9c9e44b28796f97f8b64fd1e62ef2e2598492ba94ac5592",
+    "before": "d0aac94acb0a159a5ffa6ca69d759ceb94e3c05ac11a895f3e91a575141f27ac",
+    "path": "back_prop/baseline_compare/prepare.py"
+  },
+  "back_prop/baseline_compare/verify_cache.py": {
+    "after": "44123f7ea76696657f95b3d607ad27873d62b389a710bd00bd54ea7dcec5a585",
+    "before": "39ac34fa6f7c7cae0cdff4f50e7b1d4183d227f225da7b58e7bcb57e64dfa226",
+    "path": "back_prop/baseline_compare/verify_cache.py"
+  },
+  "back_prop/common/coarse_model.py": {
+    "after": "34806ef9a99171a3ca7fb896293437a60ed7e2fab1d508068eda30c72172689d",
+    "before": "35f5a8fbd70aabf6eeb5e80c2c9e017f8a3348cd2dc253a4176621f76235efc7",
+    "path": "back_prop/common/coarse_model.py"
+  },
+  "back_prop/common/ordinal.py": {
+    "after": "d247aa6291fc0d47c5c9365d0c6a355307378c86edf0ce2e6bfcb3b644feb1c6",
+    "before": "52cf058c6675fd7b4678b26b946a267b8ecb01548ce39234f2cd0b711ca09bca",
+    "path": "back_prop/common/ordinal.py"
+  },
+  "back_prop/common/radiomics.py": {
+    "after": "97393f5244905165947e70a6aaa67a2734f090b8493f2ef9e4648402204ce748",
+    "before": "9636d4742086b5948efe787efb24a810b5f3fcd7c941ef77418d123de4c79e51",
+    "path": "back_prop/common/radiomics.py"
+  },
+  "back_prop/frozen_extrac/radiomics64.py": {
+    "after": "4b14151a6418a3f72c55b2b98d52b15363138b856483460f8a8bbcf81570998a",
+    "before": "4b14151a6418a3f72c55b2b98d52b15363138b856483460f8a8bbcf81570998a",
+    "path": "back_prop/model_v4/compat_radiomics64.py"
+  },
+  "back_prop/frozen_joint/radiomics.py": {
+    "after": "4ed173f22c046282ef42b8eb4e76f5704c9184ae137b8547f229f89c84e9acb9",
+    "before": "7bffb6fdcf916954330384df80560069c703a90931d297228cc81cbf83408c80",
+    "path": "back_prop/model_v4/compat_radiomics.py"
+  },
+  "back_prop/model_v1/__init__.py": {
+    "after": null,
+    "before": "70826b1bc3013ae4ba114e39b26b1aabb7e76bd142b2bddd1fdcc712a3ca0c4e",
+    "path": null
+  },
+  "back_prop/model_v1/data.py": {
+    "after": "b73ec59b42cc8309a92ace66fc8a2f9a9b3e04bcc7c20da2b51f5c7ff45e30ad",
+    "before": "b73ec59b42cc8309a92ace66fc8a2f9a9b3e04bcc7c20da2b51f5c7ff45e30ad",
+    "path": "back_prop/common/base_data.py"
+  },
+  "back_prop/model_v1/loss.py": {
+    "after": "1ba09d42fbc8c953f706a22fc638e64b4780149b75a6f981d385c3aa6003472e",
+    "before": "025b727c1171de706e7087dfb61bca2557d51df5cc86994fff130b404a23bbf3",
+    "path": "back_prop/common/base_loss.py"
+  },
+  "back_prop/model_v1/model.py": {
+    "after": "300a92ff175702556ed6afbced5c1bab16e1978af07abd231a82c7e22bdf304e",
+    "before": "300a92ff175702556ed6afbced5c1bab16e1978af07abd231a82c7e22bdf304e",
+    "path": "back_prop/common/base_model.py"
+  },
+  "back_prop/model_v1/train.py": {
+    "after": "8643131e8dd4ce12c5392911eb5290f1001f8121269c46aabe8fa3afc36c4748",
+    "before": "1d1e2e68c0ef9f678bb1a98b8d8621d7bbb114bb849f670fa3c5900fb80eba65",
+    "path": "back_prop/legacy_training/train_base.py"
+  },
+  "back_prop/model_v1/verify_checkpoint.py": {
+    "after": null,
+    "before": "131476e6ebc53f98879bfe4fca4347a143efe8766ab847cdd841aebda8f1e311",
+    "path": null
+  },
+  "back_prop/model_v2/__init__.py": {
+    "after": null,
+    "before": "8c6539c1152289d3bb8f3367081c2c858c26a0c17aeb140a3e35a94bb6465e53",
+    "path": null
+  },
+  "back_prop/model_v2/data.py": {
+    "after": "1fbf2f52adfe380a281943e2f24236a0e31637f2b559d9d42dfcfae231d91f4c",
+    "before": "73c068e5c3fe9e5dea88ca13abccd97289ba40e1de1f5fda10616e681c053b9b",
+    "path": "back_prop/common/coarse_data.py"
+  },
+  "back_prop/model_v2/loss.py": {
+    "after": "46a7316ebe3411773a2a72ba1094dbd3c2a49f85ee7fcdb4e3063dd7c7a6af40",
+    "before": "231cd0f0209346c80e4a83c1d119efe8dcb33068d6538f9b758eaee97f74dee4",
+    "path": "back_prop/common/coarse_loss.py"
+  },
+  "back_prop/model_v2/matcher.py": {
+    "after": "da94698195236714321acb42d732dacd24b77b57e06b7517e1d4989d7b3e0388",
+    "before": "da94698195236714321acb42d732dacd24b77b57e06b7517e1d4989d7b3e0388",
+    "path": "back_prop/common/matcher.py"
+  },
+  "back_prop/model_v2/model.py": {
+    "after": "34806ef9a99171a3ca7fb896293437a60ed7e2fab1d508068eda30c72172689d",
+    "before": "7a0b1d58e449e5145ede1fabceca0070dcb356877bb666d3deb18777fc5b36e8",
+    "path": "back_prop/common/coarse_model.py"
+  },
+  "back_prop/model_v2/ordinal.py": {
+    "after": "d247aa6291fc0d47c5c9365d0c6a355307378c86edf0ce2e6bfcb3b644feb1c6",
+    "before": "5177be98e3c58ff143c69fd6f6394aa09d44a8029a62d7b5f07a38924f6f1cd8",
+    "path": "back_prop/common/ordinal.py"
+  },
+  "back_prop/model_v2/radiomics.py": {
+    "after": "97393f5244905165947e70a6aaa67a2734f090b8493f2ef9e4648402204ce748",
+    "before": "9636d4742086b5948efe787efb24a810b5f3fcd7c941ef77418d123de4c79e51",
+    "path": "back_prop/common/radiomics.py"
+  },
+  "back_prop/model_v2/refiner.py": {
+    "after": "13777d702cdab54a6a28f1afd78505d10793d760a754bfc3fef8670187a14a72",
+    "before": "13777d702cdab54a6a28f1afd78505d10793d760a754bfc3fef8670187a14a72",
+    "path": "back_prop/common/refiner.py"
+  },
+  "back_prop/model_v2/roi.py": {
+    "after": "a647b1fb556399fd1683cb0363f5c981addd9859cc2967370e25cf7b760c7480",
+    "before": "a647b1fb556399fd1683cb0363f5c981addd9859cc2967370e25cf7b760c7480",
+    "path": "back_prop/common/roi.py"
+  },
+  "back_prop/model_v2/train.py": {
+    "after": "8ba0ede6172bb9addf896a072d5354afee7787033304b85e65e26c13886befc4",
+    "before": "4ede091479d46c4aadf2201cf9222ffcdbba7574cae9f8e8e19f211c63453198",
+    "path": "back_prop/common/train_utils.py"
+  },
+  "back_prop/model_v3/__init__.py": {
+    "after": null,
+    "before": "e26058bb14e262181f2fbb6595a0d3ffd73ddd9b418baf921fe149ce48c063ff",
+    "path": null
+  },
+  "back_prop/model_v3/checkpoint_compat.py": {
+    "after": "e2c26ceba13fed768575f9b3ecf33526f8f1144af7bf8c5839867f4eaad57f3f",
+    "before": "e2c26ceba13fed768575f9b3ecf33526f8f1144af7bf8c5839867f4eaad57f3f",
+    "path": "back_prop/common/checkpoint_compat.py"
+  },
+  "back_prop/model_v3/data.py": {
+    "after": "0e47ffbfffc6c156389e517379920f19c93ce6e75545011d0d49ad74af43c4c4",
+    "before": "1075c9c0b42acdbc58b9abbeea8f15553100d78986f059ab76650143b4e16c1b",
+    "path": "back_prop/common/semantic_data.py"
+  },
+  "back_prop/model_v3/features.py": {
+    "after": "827d24f6d7542f4e39e077dfd3d33d60a0625488020fef5ec16b5c24987d8947",
+    "before": "e55d4102b719f9e8b4982776013542a077ab80119e02e8a74c0ff65c1e9f76cc",
+    "path": "back_prop/common/features.py"
+  },
+  "back_prop/model_v3/geometry.py": {
+    "after": "dfa4e867b790b1c9ee58d84c2f0d488da2e51a7de7a20c10c2aaec51ae0fc720",
+    "before": "975bb041467600f34d2098f974fcac7f242da79604a2a5cd253c7bbdc84adccd",
+    "path": "back_prop/common/geometry.py"
+  },
+  "back_prop/model_v3/loss.py": {
+    "after": "f0ccd3cd0d73a6a0c965ff6acf8f3f676a243ba0ebc282b107e0f3ed0142a3af",
+    "before": "2d35f0bdd9c64f8226ef76271f45da18b092dcfacc0ff96c416d4a8cadab01fd",
+    "path": "back_prop/common/semantic_loss.py"
+  },
+  "back_prop/model_v3/model.py": {
+    "after": "6f43fb74bf916b0d6927c607ccfd714c8405a86f92e1a184dc0ba54e6bbea919",
+    "before": "59d34eae5304f5a0a86ac2824b168d9ea33b5bb19973c97cfaab077bd0cee822",
+    "path": "back_prop/common/semantic_model.py"
+  },
+  "back_prop/model_v3/rashomon.py": {
+    "after": "faef43b98bf814f8262cbc15bfe26f9f9e2d28eb9b6ac2ad0eb6822d1e1f7bfb",
+    "before": "faef43b98bf814f8262cbc15bfe26f9f9e2d28eb9b6ac2ad0eb6822d1e1f7bfb",
+    "path": "back_prop/common/rashomon.py"
+  },
+  "back_prop/model_v3/train.py": {
+    "after": "7b347235ba079f18884e06dbdb8f847c4879c1288b8467a5a7a81f0e504975d9",
+    "before": "5fcb3a40a53754eb7a45b5d33890ade9e578a3fa213c7d2149036bfc98cd27bb",
+    "path": "back_prop/legacy_training/train_semantic.py"
+  },
+  "back_prop/model_v3/visualization/compare_standalone_vista.py": {
+    "after": "57085159c6def40c1281531ba17a0fe4dd950596298d467e6d8b86357e4d5c75",
+    "before": "b69ab24945604fbf953aed94e046dc210329f3e06f384cab708bc6c7d3686750",
+    "path": "back_prop/evaluate/legacy_visualization/compare_standalone_vista.py"
+  },
+  "back_prop/model_v3/visualization/execute_notebook_section.py": {
+    "after": "f4a77e82e3231061237bbe582d58fa9d2a293385bbdfcb5fadbe3151a2702328",
+    "before": "f4a77e82e3231061237bbe582d58fa9d2a293385bbdfcb5fadbe3151a2702328",
+    "path": "back_prop/evaluate/legacy_visualization/execute_notebook_section.py"
+  },
+  "back_prop/model_v3/visualization/visualize_test_ct.py": {
+    "after": "c9c73de7805948c6043f9607dc9c704825b67c7fff10679bed6b69d86915e2d3",
+    "before": "46006f6da07325deff57699c03ebe58406f97c0e182a23850ca1a8e6d968b7fb",
+    "path": "back_prop/evaluate/legacy_visualization/visualize_test_ct.py"
+  },
+  "back_prop/model_v3_anneal/model.py": {
+    "after": "747445506bc703206e61c35d04edbfc389d58472d394beccb50a33cd38b81ae2",
+    "before": "2ffacec0c26b1ec2d4212380617339ded9842159067f6babb0061aea112ebe6d",
+    "path": "back_prop/common/annealed_model.py"
+  },
+  "back_prop/model_v3_anneal/monitor.py": {
+    "after": "e22b9c4eeef0daaad959aff10f16db08ec578d82ac1a995be5e2cc31410236a8",
+    "before": "b3ec52a93884feb3c386a3f8cf21af5dec02bc136a9647bae3febc57b0d27cd9",
+    "path": "back_prop/common/rng.py"
+  },
+  "back_prop/model_v3_anneal/schedule.py": {
+    "after": "67f9eefa2059148c8fdc288627959ace145a4d12cce9bc2e22ae37fd4e86021a",
+    "before": "67f9eefa2059148c8fdc288627959ace145a4d12cce9bc2e22ae37fd4e86021a",
+    "path": "back_prop/common/schedule.py"
+  }
+}

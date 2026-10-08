@@ -1,0 +1,72 @@
+{
+  "training_and_inference_verified": true,
+  "model": "deeplung",
+  "cohort_sha256": "b8e93f42139719fb762c5de14933d6ea8feb91430f741ed2d9900f2df3fcd22f",
+  "training_scans": 638,
+  "endpoint": "LIDC reader-derived current malignancy",
+  "held_out_performance_evaluated": false,
+  "training_audits": {
+    "deeplung_detector": {
+      "verified": true,
+      "job_id": 12622703,
+      "epochs": 5,
+      "training_scans": 638,
+      "samples_per_epoch": 2284,
+      "cohort_sha256": "b8e93f42139719fb762c5de14933d6ea8feb91430f741ed2d9900f2df3fcd22f",
+      "finite_weights_and_optimizer": true,
+      "checkpoint_sha256": "98434301a466f6b9e8dda59cf3710a439a8dd2116a62d8c0d3d6dbd8c342eaf9",
+      "final_loss": 0.13846127204140304,
+      "expected_optimizer_steps": 2855,
+      "batchnorm_training_forward_count": 2855
+    },
+    "deeplung_initial_classifier": {
+      "verified": true,
+      "job_id": 12622903,
+      "epochs": 700,
+      "training_scans": 638,
+      "samples_per_epoch": 1599,
+      "cohort_sha256": "b8e93f42139719fb762c5de14933d6ea8feb91430f741ed2d9900f2df3fcd22f",
+      "finite_weights_and_optimizer": true,
+      "checkpoint_sha256": "89692425ef30cfb5e4d4f04c019f7676924abbba6e4b90cc0c094a313d17b712",
+      "final_loss": 0.2513411784917116,
+      "expected_optimizer_steps": 70000,
+      "batchnorm_training_forward_count": 70000,
+      "gbm_fitting_samples": 1599
+    },
+    "deeplung_final_classifier": {
+      "verified": true,
+      "job_id": 12623270,
+      "epochs": 105,
+      "training_scans": 638,
+      "samples_per_epoch": 14087,
+      "cohort_sha256": "b8e93f42139719fb762c5de14933d6ea8feb91430f741ed2d9900f2df3fcd22f",
+      "finite_weights_and_optimizer": true,
+      "checkpoint_sha256": "fb8184bf5e5016292783e6c5ae0a463bb4140385aaaa08ceb2afd9bbf7e8a07d",
+      "final_loss": 0.27678819928449344,
+      "expected_optimizer_steps": 92505,
+      "batchnorm_training_forward_count": 162505,
+      "gbm_fitting_samples": 14087,
+      "training_proposal_cases": 638
+    }
+  },
+  "inference_verifications": {
+    "whole_ct": "/usr/project/rudinlab/datasets/LIDC_IDRI/joint_model/baseline_compare/deeplung/classifier/12623270/whole_ct_verification.json"
+  },
+  "artifacts": {
+    "classifier": {
+      "path": "/usr/project/rudinlab/datasets/LIDC_IDRI/joint_model/baseline_compare/deeplung/classifier/12623270/last.pt",
+      "link": "/home/users/yj255/code/imaging_feature/back_prop/baseline_compare/deeplung/classifier.pt",
+      "sha256": "fb8184bf5e5016292783e6c5ae0a463bb4140385aaaa08ceb2afd9bbf7e8a07d"
+    },
+    "detector": {
+      "path": "/usr/project/rudinlab/datasets/LIDC_IDRI/joint_model/baseline_compare/deeplung/detector/12622703/last.pt",
+      "link": "/home/users/yj255/code/imaging_feature/back_prop/baseline_compare/deeplung/detector.pt",
+      "sha256": "98434301a466f6b9e8dda59cf3710a439a8dd2116a62d8c0d3d6dbd8c342eaf9"
+    },
+    "gbm": {
+      "path": "/usr/project/rudinlab/datasets/LIDC_IDRI/joint_model/baseline_compare/deeplung/classifier/12623270/gbm.pkl",
+      "link": "/home/users/yj255/code/imaging_feature/back_prop/baseline_compare/deeplung/gbm.pkl",
+      "sha256": "dfaf8518ad0343843fb0de9a8beabaded082aa8cf7149889fcc751ba9404ae7b"
+    }
+  }
+}

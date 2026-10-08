@@ -1,0 +1,27 @@
+{
+  "cohort_sha256": "b8e93f42139719fb762c5de14933d6ea8feb91430f741ed2d9900f2df3fcd22f",
+  "training_case_keys_sha256": "d776378c040f94f6bff9ae6b19bc6f9c53c68efbcf27a173dacc7c392413a1f9",
+  "cases": 638,
+  "patients": 630,
+  "retained_nodules": 1599,
+  "ignored_nodules_with_masks": 442,
+  "valid_scan_labels": 513,
+  "slices": 8603,
+  "empty_consensus_annotations": [
+    {
+      "case": "LIDC-IDRI-0909__scan746",
+      "nodule_id": 1,
+      "ignored": true
+    }
+  ],
+  "effective_scan_label_changes": [
+    {
+      "case": "LIDC-IDRI-0909__scan746",
+      "field": "risk_target_valid",
+      "csv_declared": false,
+      "v3_effective": true
+    }
+  ],
+  "sybil_cases_without_visible_attention": [],
+  "audit_passed": true
+}

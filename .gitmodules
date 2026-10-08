@@ -1,0 +1,12 @@
+[submodule "baseline_compare/sybil/upstream"]
+	path = baseline_compare/sybil/upstream
+	url = https://github.com/reginabarzilaygroup/Sybil.git
+[submodule "baseline_compare/deeplung/upstream"]
+	path = baseline_compare/deeplung/upstream
+	url = https://github.com/wentaozhu/DeepLung.git
+[submodule "baseline_compare/edicnet/hscnn_upstream"]
+	path = baseline_compare/edicnet/hscnn_upstream
+	url = https://github.com/sincewhenUCLA/Interpretable-Deep-Hierarchical-Semantic-Convolutional-Neural-Network-HSCNN.git
+[submodule "baseline_compare/edicnet/retinanet_upstream"]
+	path = baseline_compare/edicnet/retinanet_upstream
+	url = https://github.com/yhenon/pytorch-retinanet.git

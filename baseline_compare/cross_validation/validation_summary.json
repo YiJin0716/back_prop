@@ -1,0 +1,19 @@
+{
+  "job_graph_audit_passed": true,
+  "formal_jobs": 37,
+  "late_phase_smoke": {
+    "job_id": "12660794",
+    "passed": true,
+    "training_CT_count": 4,
+    "phase": "end_to_end_unfrozen",
+    "teacher_probability": 1.0,
+    "max_gpu_memory_gib": 21.55538320541382,
+    "bank_fits": 3,
+    "separate_from_formal_training": true
+  },
+  "superseded_smoke": {
+    "job_id": "12660787",
+    "result": "Bank-empty guard triggered because the randomly initialized locator missed training nodules with teacher forcing off; finite backward passes, no GPU OOM. Replaced by teacher-forced gradient-path smoke."
+  },
+  "statistics_regression": "Three AUCs exactly match existing fold-0 evaluation; no new test inference or tuning."
+}

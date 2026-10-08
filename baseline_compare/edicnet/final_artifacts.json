@@ -1,0 +1,53 @@
+{
+  "training_and_inference_verified": true,
+  "model": "edicnet",
+  "cohort_sha256": "b8e93f42139719fb762c5de14933d6ea8feb91430f741ed2d9900f2df3fcd22f",
+  "training_scans": 638,
+  "endpoint": "LIDC reader-derived current malignancy",
+  "held_out_performance_evaluated": false,
+  "training_audits": {
+    "edicnet_detector": {
+      "verified": true,
+      "job_id": 12620997,
+      "epochs": 50,
+      "training_scans": 638,
+      "samples_per_epoch": 8603,
+      "cohort_sha256": "b8e93f42139719fb762c5de14933d6ea8feb91430f741ed2d9900f2df3fcd22f",
+      "finite_weights_and_optimizer": true,
+      "checkpoint_sha256": "fae630d02e920c5676108d035138bbfe1ced9e21d737d1dd523fe6140fd71cd9",
+      "final_loss": 0.006358922584600028,
+      "expected_optimizer_steps": 215100,
+      "adam_step_counter": 215100
+    },
+    "edicnet_classifier": {
+      "verified": true,
+      "job_id": 12620991,
+      "epochs": 200,
+      "training_scans": 638,
+      "samples_per_epoch": 1599,
+      "cohort_sha256": "b8e93f42139719fb762c5de14933d6ea8feb91430f741ed2d9900f2df3fcd22f",
+      "finite_weights_and_optimizer": true,
+      "checkpoint_sha256": "e00014e00090249d04e34005d4e30ebd41e7ed0b3f85ad0682a5a5a380c48926",
+      "final_loss": 3.901827504125874,
+      "expected_optimizer_steps": 53400,
+      "adam_step_counter": 53400,
+      "batchnorm_training_forward_count": 53400
+    }
+  },
+  "inference_verifications": {
+    "whole_ct": "/usr/project/rudinlab/datasets/LIDC_IDRI/joint_model/baseline_compare/edicnet/hscnn/12620991/whole_ct_verification.json",
+    "max_risk_over_up_to_20_detected_rois": "/usr/project/rudinlab/datasets/LIDC_IDRI/joint_model/baseline_compare/edicnet/hscnn/12620991/whole_ct_max_risk_verification.json"
+  },
+  "artifacts": {
+    "classifier": {
+      "path": "/usr/project/rudinlab/datasets/LIDC_IDRI/joint_model/baseline_compare/edicnet/hscnn/12620991/last.pt",
+      "link": "/home/users/yj255/code/imaging_feature/back_prop/baseline_compare/edicnet/classifier.pt",
+      "sha256": "e00014e00090249d04e34005d4e30ebd41e7ed0b3f85ad0682a5a5a380c48926"
+    },
+    "detector": {
+      "path": "/usr/project/rudinlab/datasets/LIDC_IDRI/joint_model/baseline_compare/edicnet/retinanet/12620997/last.pt",
+      "link": "/home/users/yj255/code/imaging_feature/back_prop/baseline_compare/edicnet/detector.pt",
+      "sha256": "fae630d02e920c5676108d035138bbfe1ced9e21d737d1dd523fe6140fd71cd9"
+    }
+  }
+}

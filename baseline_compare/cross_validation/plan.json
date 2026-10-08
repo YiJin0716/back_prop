@@ -1,0 +1,119 @@
+{
+  "schema": 1,
+  "run": "/usr/project/rudinlab/datasets/LIDC_IDRI/joint_model/cross_validation_20260921",
+  "plots": "/home/users/yj255/code/imaging_feature/back_prop/baseline_compare/plots/cross_validation_20260921",
+  "folds": [
+    {
+      "fold": 0,
+      "directory": "/usr/project/rudinlab/datasets/LIDC_IDRI/joint_model/cross_validation_20260921/fold_0",
+      "cohort": "/usr/project/rudinlab/datasets/LIDC_IDRI/joint_model/cross_validation_20260921/fold_0/cohort.json",
+      "cohort_sha256": "c8e2f0ed4610b9dfea1e586bd8e870104309fe523fecff3f893146f3423e6cdd",
+      "manifest_sha256": "b14cc2afe3c5c840a5a8795ea153a5d674b510d38e345e5b532ca1f19b4466a6",
+      "vista_checkpoint": "/usr/project/rudinlab/datasets/LIDC_IDRI/vista3D_workspace/results/fold_0/checkpoints/best_metric_model.pt",
+      "vista_checkpoint_sha256": "600093f8277b480b942a5b4168e5148fb20f82ac479f48d5308e3fcbe1c85c49",
+      "vista_configs": {
+        "/home/users/yj255/code/imaging_feature/vista3D/archive/results_patch160_job12377744_20260820/fold_0/configs.yaml": "d68f86db1353c7d395176010e61a0da0437120393e6559188260985f0fd95a27",
+        "/home/users/yj255/code/imaging_feature/vista3D/results/fold_0/configs.yaml": "33fd2723521a9cb75e96e877c0582c04f2cb92d5785008ccfef52e5f0e652dac"
+      },
+      "train_scans": 638,
+      "test_scans": 166,
+      "train_patients": 630,
+      "test_patients": 166
+    },
+    {
+      "fold": 1,
+      "directory": "/usr/project/rudinlab/datasets/LIDC_IDRI/joint_model/cross_validation_20260921/fold_1",
+      "cohort": "/usr/project/rudinlab/datasets/LIDC_IDRI/joint_model/cross_validation_20260921/fold_1/cohort.json",
+      "cohort_sha256": "94bc08e00d36f804dbd443a6c79d888a1f98b9bf79fcb4e56e9fd16ad3a5e31d",
+      "manifest_sha256": "b1b6f480297799aa406607da69995458342b8180e4504d31926257ffbc1614e0",
+      "vista_checkpoint": "/usr/project/rudinlab/datasets/LIDC_IDRI/vista3D_workspace/results/fold_1/checkpoints/best_metric_model.pt",
+      "vista_checkpoint_sha256": "0a8071e71b672f467cef3eddfb3a2d4826bdf3ef0c6c462efef679a0177c2bcf",
+      "vista_configs": {
+        "/home/users/yj255/code/imaging_feature/vista3D/archive/results_patch160_job12377744_20260820/fold_1/configs.yaml": "935a68b5e91f6e15da9a10656409110b9dac9d739d7f5f60ae7fca5bdd19324f",
+        "/home/users/yj255/code/imaging_feature/vista3D/results/fold_1/configs.yaml": "7e71df53f1505563929c57de988a463cd6810ca298537902ade6c5c92c4c34b8"
+      },
+      "train_scans": 638,
+      "test_scans": 166,
+      "train_patients": 632,
+      "test_patients": 164
+    },
+    {
+      "fold": 2,
+      "directory": "/usr/project/rudinlab/datasets/LIDC_IDRI/joint_model/cross_validation_20260921/fold_2",
+      "cohort": "/usr/project/rudinlab/datasets/LIDC_IDRI/joint_model/cross_validation_20260921/fold_2/cohort.json",
+      "cohort_sha256": "c492bfdf0b802b14d0884b68977633e551cff9b0f9ca7b3c28b0180d0522795d",
+      "manifest_sha256": "6f4de17f100a035b74606314cca1ab5433c1a9e6ef479ff389ef475028297ef7",
+      "vista_checkpoint": "/usr/project/rudinlab/datasets/LIDC_IDRI/vista3D_workspace/results/fold_2/checkpoints/best_metric_model.pt",
+      "vista_checkpoint_sha256": "f0384c58012ef0aec7c1e4a3b3ecf1f8c20ccc1934be6f0558a4af461bd65150",
+      "vista_configs": {
+        "/home/users/yj255/code/imaging_feature/vista3D/archive/results_patch160_job12377744_20260820/fold_2/configs.yaml": "da93a76380594014a38a8355f1dfe21b868031c124bfb634de7d2955df77797c",
+        "/home/users/yj255/code/imaging_feature/vista3D/results/fold_2/configs.yaml": "43bc53fe483a21a9f05169d7a22145b0574c07c85a13edcc6d53f763a44a1a15"
+      },
+      "train_scans": 639,
+      "test_scans": 165,
+      "train_patients": 633,
+      "test_patients": 163
+    },
+    {
+      "fold": 3,
+      "directory": "/usr/project/rudinlab/datasets/LIDC_IDRI/joint_model/cross_validation_20260921/fold_3",
+      "cohort": "/usr/project/rudinlab/datasets/LIDC_IDRI/joint_model/cross_validation_20260921/fold_3/cohort.json",
+      "cohort_sha256": "14336e6ee87fab7a7823c9ab2009d42eba1c6410818910fe48ff4c968e76941a",
+      "manifest_sha256": "538ac38d8c0da9fadd343d004fd3f22103e4bcb8f2b0076e2953d4d1e96bff62",
+      "vista_checkpoint": "/usr/project/rudinlab/datasets/LIDC_IDRI/vista3D_workspace/results/fold_3/checkpoints/best_metric_model.pt",
+      "vista_checkpoint_sha256": "e000658dfff904f5c7780200b6020f51a855c82bcf248fbebc05f929259763d4",
+      "vista_configs": {
+        "/home/users/yj255/code/imaging_feature/vista3D/archive/results_patch160_job12377744_20260820/fold_3/configs.yaml": "37544c418eea4f0b10a8c18823eff79b247dc6ace0b8c5c9936eaf8de0020dd2",
+        "/home/users/yj255/code/imaging_feature/vista3D/results/fold_3/configs.yaml": "b11e9519d247f1aa3ecb76a3753bb7eed59a184450af10972c5ea5e45e2c3ee7"
+      },
+      "train_scans": 647,
+      "test_scans": 157,
+      "train_patients": 641,
+      "test_patients": 155
+    },
+    {
+      "fold": 4,
+      "directory": "/usr/project/rudinlab/datasets/LIDC_IDRI/joint_model/cross_validation_20260921/fold_4",
+      "cohort": "/usr/project/rudinlab/datasets/LIDC_IDRI/joint_model/cross_validation_20260921/fold_4/cohort.json",
+      "cohort_sha256": "989300a0c202bc0bb32d83a998f9b2045c97dac15d32f0f556c9ef70fd34172c",
+      "manifest_sha256": "1e12d39f28ea9beb3ff09ce6defbb2287982c2ea4e625679276305ca1adbcfab",
+      "vista_checkpoint": "/usr/project/rudinlab/datasets/LIDC_IDRI/vista3D_workspace/results/fold_4/checkpoints/best_metric_model.pt",
+      "vista_checkpoint_sha256": "c9e2f4942dec34f4c51bcf68412281b4d5164943857e751d28da5c55d6856fa5",
+      "vista_configs": {
+        "/home/users/yj255/code/imaging_feature/vista3D/archive/results_patch160_job12377744_20260820/fold_4/configs.yaml": "560f7c1cf44dc11b469c28f3f1b00b6a76b3c2758e8ecc821473b59e82c208b7"
+      },
+      "train_scans": 654,
+      "test_scans": 150,
+      "train_patients": 648,
+      "test_patients": 148
+    }
+  ],
+  "eligible_scans": 804,
+  "eligible_patients": 796,
+  "seed": 42,
+  "epochs": {
+    "v3": 18,
+    "sybil": 3,
+    "detector": 5,
+    "classifier": 700,
+    "adapt": 105
+  },
+  "selection": "fixed final epochs; no held-out selection or calibration",
+  "deeplung_public_checkpoint": "/home/users/yj255/code/imaging_feature/back_prop/baseline_compare/deeplung/upstream/detector/dpnmodel/fd0066.ckpt",
+  "deeplung_public_sha256": "1471097384a5fc45420873afbebda6e86ddcb04b923f8a2640ff66dab622bb2c",
+  "limitations": [
+    "Public DeepLung LUNA16 pretraining may include held-out LIDC patients.",
+    "Fold 0 was previously inspected; this is not a prospectively untouched five-fold experiment.",
+    "Endpoint is reader-derived current malignancy, not future cancer incidence."
+  ],
+  "reused_folds": [
+    0
+  ],
+  "new_training_folds": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "reuse_reason": "Original fold 0 already trained and evaluated; user requests training only the four remaining folds."
+}

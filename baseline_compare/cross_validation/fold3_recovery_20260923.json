@@ -1,0 +1,126 @@
+{
+  "job_id": "12687762",
+  "stage": "v3",
+  "fold": 3,
+  "dependencies": [],
+  "command": [
+    "sbatch",
+    "--parsable",
+    "/home/users/yj255/code/imaging_feature/back_prop/baseline_compare/cross_validation/resume_fold3.sbatch",
+    "/usr/project/rudinlab/datasets/LIDC_IDRI/joint_model/cross_validation_20260921/fold_3/v3/recovery_20260923/epoch_013.pt"
+  ],
+  "resume_checkpoint": "/usr/project/rudinlab/datasets/LIDC_IDRI/joint_model/cross_validation_20260921/fold_3/v3/recovery_20260923/epoch_013.pt",
+  "completed_epochs_at_resume": 13,
+  "previous_attempts": [
+    {
+      "job_id": "12660732",
+      "stage": "v3",
+      "fold": 3,
+      "dependencies": [],
+      "command": [
+        "sbatch",
+        "--parsable",
+        "--job-name=cv-f3-v3",
+        "--output=/home/users/yj255/code/imaging_feature/back_prop/baseline_compare/cross_validation/logs/f3-v3_%j.out",
+        "--error=/home/users/yj255/code/imaging_feature/back_prop/baseline_compare/cross_validation/logs/f3-v3_%j.err",
+        "--gres=gpu:a5000:4",
+        "--cpus-per-task=16",
+        "--mem=192G",
+        "--time=7-00:00:00",
+        "/home/users/yj255/code/imaging_feature/back_prop/baseline_compare/cross_validation/job.sbatch",
+        "v3",
+        "3"
+      ]
+    }
+  ],
+  "submitted_at": "2026-09-23T12:51:05.842929+00:00",
+  "reason": "Bounded annotation-mask I/O retries; resume preserved epoch 13 with 4 ranks and identical training hyperparameters.",
+  "status": "RUNNING",
+  "verified_at": "2026-09-23T12:54:47.725158+00:00",
+  "preflight": {
+    "event": "resume_preflight_pass",
+    "fold": 3,
+    "checkpoint": "/usr/project/rudinlab/datasets/LIDC_IDRI/joint_model/cross_validation_20260921/fold_3/v3/recovery_20260923/epoch_013.pt",
+    "checkpoint_sha256": "7eeface8a0d7ce9a56825cb974de05f5f2029610917f59040fea50642c1f8fba",
+    "completed_epochs": 13,
+    "target_epochs": 18,
+    "world_size": 4,
+    "training_cases": 647,
+    "mask_headers_read": 5304,
+    "failed_cases_reprocessed": [
+      "LIDC-IDRI-0673__scan982",
+      "LIDC-IDRI-0704__scan951"
+    ],
+    "preflight_seconds": 103.56888265348971,
+    "optimizer_state_entries": 306,
+    "cohort_sha256": "14336e6ee87fab7a7823c9ab2009d42eba1c6410818910fe48ff4c968e76941a",
+    "source_job": "12660732",
+    "mask_io_source_sha256": "b73ec59b42cc8309a92ace66fc8a2f9a9b3e04bcc7c20da2b51f5c7ff45e30ad"
+  },
+  "resume": {
+    "checkpoint": "/usr/project/rudinlab/datasets/LIDC_IDRI/joint_model/cross_validation_20260921/fold_3/v3/recovery_20260923/epoch_013.pt",
+    "completed_epochs": 13,
+    "cache_size": 1621,
+    "bank_size": 30,
+    "bank_fits": 1296,
+    "optimizer_state_entries": 306,
+    "cuda_rng_format": {
+      "saved_bytes": 16,
+      "restored_bytes": 16
+    },
+    "rng_restored": true
+  },
+  "first_training_update": {
+    "event": "step",
+    "epoch": 14,
+    "step": 1,
+    "phase": "diagnostic_ramp",
+    "case_id": "LIDC-IDRI-0890__scan765",
+    "curriculum_epoch": 13,
+    "shape": [
+      375,
+      375,
+      288
+    ],
+    "windows": 48,
+    "teacher_probability": 0.3076923076923077,
+    "teacher_forced": 1,
+    "fallbacks": 0,
+    "positive_candidates": 2,
+    "refined_candidates": 4,
+    "ignored_candidates": 1,
+    "risk_target_valid": true,
+    "loss": 7.528735160827637,
+    "object": 0.6116150617599487,
+    "box_l1": 0.13810352981090546,
+    "box_giou": 1.2088065147399902,
+    "coarse_dice": 0.6305639743804932,
+    "fine_dice": 0.6331504583358765,
+    "ordinal": 1.3093087673187256,
+    "nodule": 1.0249563455581665,
+    "risk": 0.27704837918281555,
+    "grad_norm": 14.583704037866976,
+    "vista_grad_norm": 0.0,
+    "detr_grad_norm": 12.68840217590332,
+    "refiner_grad_norm": 4.618927478790283,
+    "medicalnet_grad_norm": 5.173972129821777,
+    "bank_ready": true,
+    "bank_size": 30,
+    "sampled_models": 9,
+    "bank_fits": 1297,
+    "bank_cache_size": 1621,
+    "bank_last_fit": {
+      "samples": 1621,
+      "positives": 530,
+      "size": 30,
+      "distinct_supports": 30,
+      "seconds": 1.5305607318878174,
+      "best_loss": 0.4237925597459145,
+      "worst_loss": 0.42861322516501627
+    },
+    "loss_scale": 1.0,
+    "optimizer_step_skipped": false,
+    "step_seconds": 29.85427132435143,
+    "data_seconds": 19.529984259977937
+  }
+}

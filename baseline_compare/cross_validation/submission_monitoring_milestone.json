@@ -1,0 +1,110 @@
+{
+  "time_utc": "2026-09-21T05:13:32.761880+00:00",
+  "milestone": "All folds submitted with downstream evaluation; multiple rounds of early training monitored. This is not completion of training or CV evaluation.",
+  "formal_jobs": 37,
+  "status_snapshot": "2026-09-21T05:12:24.453117+00:00",
+  "actual_progress": {
+    "f0-v3": {
+      "state": "RUNNING",
+      "completed_epochs": 0,
+      "last_epoch": 1,
+      "last_step": 33
+    },
+    "f1-v3": {
+      "state": "RUNNING",
+      "completed_epochs": 0,
+      "last_epoch": 1,
+      "last_step": 33
+    },
+    "f2-v3": {
+      "state": "RUNNING",
+      "completed_epochs": 0,
+      "last_epoch": 1,
+      "last_step": 33
+    },
+    "f3-v3": {
+      "state": "RUNNING",
+      "completed_epochs": 0,
+      "last_epoch": 1,
+      "last_step": 6
+    },
+    "f0-sybil": {
+      "state": "RUNNING",
+      "completed_epochs": 2,
+      "last_epoch": 3,
+      "last_step": 161
+    },
+    "f0-detector": {
+      "state": "RUNNING",
+      "completed_epochs": 0,
+      "last_epoch": 1,
+      "last_step": 201
+    },
+    "f0-classifier": {
+      "state": "RUNNING",
+      "completed_epochs": 3,
+      "last_epoch": 3,
+      "last_step": 51
+    },
+    "f1-sybil": {
+      "state": "RUNNING",
+      "completed_epochs": 2,
+      "last_epoch": 3,
+      "last_step": 201
+    },
+    "f1-detector": {
+      "state": "RUNNING",
+      "completed_epochs": 0,
+      "last_epoch": 1,
+      "last_step": 201
+    },
+    "f1-classifier": {
+      "state": "RUNNING",
+      "completed_epochs": 3,
+      "last_epoch": 3,
+      "last_step": 101
+    },
+    "f2-sybil": {
+      "state": "RUNNING",
+      "completed_epochs": 1,
+      "last_epoch": 1,
+      "last_step": 621
+    },
+    "f2-detector": {
+      "state": "RUNNING",
+      "completed_epochs": 0,
+      "last_epoch": 1,
+      "last_step": 101
+    },
+    "f2-classifier": {
+      "state": "RUNNING",
+      "completed_epochs": 2,
+      "last_epoch": 3,
+      "last_step": 51
+    },
+    "f3-sybil": {
+      "state": "RUNNING",
+      "completed_epochs": 1,
+      "last_epoch": 1,
+      "last_step": 641
+    },
+    "f3-detector": {
+      "state": "RUNNING",
+      "completed_epochs": 0,
+      "last_epoch": 1,
+      "last_step": 51
+    }
+  },
+  "healthy_running_jobs": 15,
+  "pending_jobs": 21,
+  "limits": "V3 is still in epoch 1; fold 4 V3 and some baseline folds/stages are waiting for resources. Full future training success and test performance are not yet known.",
+  "cache_audit": "All 5 folds passed, no retained physical nodules lost.",
+  "public_pretraining_verified_running_detector_folds": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "dependency_graph_healthy": true,
+  "superseded_by_user_correction": "Reuse original completed fold 0. Only folds 1\u20134 train anew; see fold0_reuse_audit.json, current jobs.json and latest_status.json."
+}
