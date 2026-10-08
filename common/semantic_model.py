@@ -26,7 +26,7 @@ class WholeCTOutputV3(WholeCTOutput):
 
 class WholeCTJointModelV3(WholeCTJointModelV2):
     def __init__(self, *, medicalnet_checkpoint=DEFAULT_MEDICALNET_CHECKPOINT,
-                 medicalnet_roi_size=64, encoder_factory=None, bank_config=None,
+                 medicalnet_roi_size=64, encoder_factory=None, bank_config=None, semantics_factory=None,
                  amp_dtype=torch.bfloat16, **kwargs):
         # Avoid constructing/loading the replaced v2 diagnostic modules.
         super().__init__(radiomics_factory=nn.Identity, ordinal_heads_factory=nn.Identity, **kwargs)
@@ -46,8 +46,9 @@ class WholeCTJointModelV3(WholeCTJointModelV2):
         self.amp_dtype = amp_dtype
         del self.ordinal_heads
         self.radiomics = SoftRadiomics3D()
-        self.semantics = MedicalNetSemantics(medicalnet_checkpoint, medicalnet_roi_size,
-                                            encoder_factory, self.use_checkpoint)
+        self.semantics = (semantics_factory() if semantics_factory is not None else
+                          MedicalNetSemantics(medicalnet_checkpoint, medicalnet_roi_size,
+                                              encoder_factory, self.use_checkpoint))
         self.rashomon = ContinuousRashomonBank(FEATURE_NAMES, **(bank_config or {}))
 
     def _vista_window_summary(

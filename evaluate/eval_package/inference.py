@@ -11,6 +11,8 @@ from .annotations import OfficialAnnotations, case_key, load_image, load_test_ca
 from .types import CaseEvaluation, MaskCrop, PredictedNodule, SEMANTIC_NAMES
 
 ARCHITECTURES = {
+    "whole_ct_cnn3d_valid_supervision_v5":
+        ("back_prop.model_v5.model", "WholeCTJointModelV5"),
     "whole_ct_radiomics_offset_ws_groupnorm_early_diagnostics_v4":
         ("back_prop.model_v4.model", "WholeCTJointModelV4"),
     "whole_ct_radiomics_offset_groupnorm_early_diagnostics_v4":
@@ -52,7 +54,7 @@ def _uninitialized_encoder():
 def load_joint_model(checkpoint, *, device="cuda"):
     """Restore a trusted training checkpoint, strictly, without refitting.
 
-    Supports V2, V3, V3_anneal, V3_hard and V4. Full weights are restored without
+    Supports V2, V3, V3_anneal, V3_hard, V4 and V5. Full weights are restored without
     needing the original VISTA/MedicalNet initialization checkpoint files.
     The returned model is in eval mode and carries checkpoint provenance.
     """
@@ -78,17 +80,24 @@ def load_joint_model(checkpoint, *, device="cuda"):
         "whole_ct_radiomics_offset_groupnorm_early_diagnostics_v4",
         "whole_ct_radiomics_offset_ws_groupnorm_early_diagnostics_v4",
     }
-    has_bank = "rashomon" in architecture or is_v4
+    is_v5 = architecture == "whole_ct_cnn3d_valid_supervision_v5"
+    has_bank = "rashomon" in architecture or is_v4 or is_v5
     if has_bank:
         # The bank's own serialized schema is the authority, including modes
         # such as 'best', and any non-default fitting parameters.
         state = saved["model"]["rashomon._extra_state"]
         bank = dict(state["config"])
         bank.update({k: state[k] for k in ("fraction", "min_samples", "refresh_every", "mode")})
-        kwargs.update(encoder_factory=_uninitialized_encoder,
-                      medicalnet_roi_size=config.get("medicalnet_roi_size", 64),
-                      amp_dtype=getattr(torch, config.get("amp_dtype", "bfloat16")),
+        kwargs.update(amp_dtype=getattr(torch, config.get("amp_dtype", "bfloat16")),
                       bank_config=bank)
+        if is_v5:
+            kwargs.update(semantic_roi_size=config.get('semantic_roi_size', 64),
+                          semantic_width=config.get('semantic_width', 16),
+                          semantic_min_dice=config.get('semantic_min_dice', 0.),
+                          baseline_l2=state['baseline_l2'])
+        else:
+            kwargs.update(encoder_factory=_uninitialized_encoder,
+                          medicalnet_roi_size=config.get("medicalnet_roi_size", 64))
         if is_v4:
             kwargs["baseline_l2"] = state["baseline_l2"]
             # Old checkpoints must retain their original predictions. Weight
@@ -104,8 +113,8 @@ def load_joint_model(checkpoint, *, device="cuda"):
     model.load_state_dict(saved["model"], strict=True)
     if has_bank and not int(model.rashomon.count):
         raise ValueError("Checkpoint has no fitted Rashomon bank; malignancy inference is unavailable")
-    if is_v4 and not int(model.rashomon.baseline_count):
-        raise ValueError("Checkpoint has no fitted V4 radiomics baseline")
+    if (is_v4 or is_v5) and not int(model.rashomon.baseline_count):
+        raise ValueError("Checkpoint has no fitted radiomics baseline")
     model.evaluation_metadata = {
         "checkpoint": str(Path(checkpoint).resolve()), "architecture": architecture,
         "epoch": int(saved["epoch"]) + 1,
