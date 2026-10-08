@@ -9,10 +9,3 @@
 | `baseline_compare/` | Comparisons with baselines such as Sybil, DeepLung, and EDICNet, including cross-validation and results. |
 
 Model overview: `V4_model.pdf`. LaTeX source: `V4_model.tex`. Architecture diagram: `V4_structure.png`.
-
-Clone into a directory named `back_prop` and run Python modules from its parent
-directory (for example, `python -m back_prop.model_v4.train --help`). Initialize
-baseline dependencies with `git submodule update --init --recursive` when needed.
-CT data, pretrained weights, generated results, and Python environments are external.
-The current paths and Slurm scripts target the original `imaging_feature` workspace;
-adapt them and provide its sibling dependencies, including VISTA3D, on another machine.
