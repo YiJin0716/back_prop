@@ -28,7 +28,7 @@ export PYTHONPATH="$ROOT/vista3D/VISTA/vista3d:$ROOT:${PYTHONPATH:-}"
 export PYTHONUNBUFFERED=1 OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2
 export PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:128
 OUTPUT=/usr/project/rudinlab/datasets/LIDC_IDRI/joint_model/model_v4_oversample_runs/${SLURM_JOB_ID}
-INITIAL=(--init-v2 /usr/project/rudinlab/datasets/LIDC_IDRI/joint_model/model_v2_runs/12596089/latest.pt)
+INITIAL=()
 if [[ $# -gt 0 ]]; then INITIAL=(--resume "$1"); fi
 "$PYTHON" -m torch.distributed.run --standalone --nproc_per_node=4 -m back_prop.model_v4_oversample.train \
     --output-dir "$OUTPUT" --epochs 18 --window-size 128 128 128 \

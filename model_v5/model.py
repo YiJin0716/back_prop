@@ -36,18 +36,58 @@ register_dataclass(WholeCTOutputV5)
 
 class WholeCTJointModelV5(WholeCTJointModelV3):
     def __init__(self, *, bank_config=None, baseline_l2=1e-3,
-                 semantic_roi_size=64, semantic_width=16, semantic_min_dice=.3, **kwargs):
+                 semantic_roi_size=64, semantic_width=16, semantic_min_dice=.3,
+                 detector_kind='legacy', detector_nms_iou=.5,
+                 native_proposal_threshold=.1, native_confidence_residual_bound=None, **kwargs):
         kwargs.setdefault('teacher_full_epochs', 1)
         kwargs.setdefault('teacher_zero_epoch', 11)
         factory = lambda: CNNSemantics(semantic_roi_size, semantic_width,
                                       kwargs.get('use_checkpoint', True))
         super().__init__(bank_config=bank_config, semantics_factory=factory, **kwargs)
+        if detector_kind not in ('legacy','mask_guided','native_seeded'):
+            raise ValueError('Unknown V5 detector kind')
+        if not 0 < detector_nms_iou <= 1:
+            raise ValueError('Detector mask NMS IoU must be in (0,1]')
+        self.detector_kind = detector_kind
+        self.detector_nms_iou = float(detector_nms_iou)
+        if not 0<native_proposal_threshold<1:
+            raise ValueError('Native proposal threshold must be in (0,1)')
+        self.native_proposal_threshold=float(native_proposal_threshold)
+        self.native_confidence_residual_bound=native_confidence_residual_bound
+        if detector_kind in ('mask_guided','native_seeded'):
+            from .detector import MaskGuidedDETR,NativeSeededDETR
+            self.detr = MaskGuidedDETR.from_legacy(self.detr)
+            if detector_kind=='native_seeded':
+                self.detr=NativeSeededDETR.from_mask_guided(self.detr,
+                    confidence_residual_bound=native_confidence_residual_bound)
+        # Independent refiner warmup uses neutral auxiliary inputs. Preserve
+        # that learned function on assembly; joint training learns their gains.
+        # Query FiLM weights already start at zero; leave its query input live
+        # so that the FiLM weights can acquire a gradient during joint training.
+        self.refiner_conditioning=(torch.nn.Parameter(torch.zeros(2))
+                                   if detector_kind=='native_seeded' else None)
         self.rashomon = ResidualRiskBank(baseline_l2=baseline_l2, **(bank_config or {}))
         # V3's original sigmoid temperature is fixed for every epoch and saved.
         self.register_buffer('mask_temperature', torch.tensor(1.0))
         if not 0 <= semantic_min_dice <= 1:
             raise ValueError('semantic_min_dice must be in [0, 1]')
         self.semantic_min_dice = float(semantic_min_dice)
+
+    def select_detection_queries(self, object_logits, mask_logits, threshold=None):
+        threshold = self.inference_object_threshold if threshold is None else threshold
+        if self.detector_kind in ('mask_guided','native_seeded'):
+            from .detector import select_mask_queries
+            return select_mask_queries(object_logits,mask_logits,threshold,self.detector_nms_iou)
+        return (object_logits.sigmoid()>=threshold).nonzero().flatten()
+
+    def detection_inputs(self,image):
+        if self.detector_kind!='native_seeded':
+            return (*self.discover(image),None)
+        from .native_proposals import discover_native,native_proposals
+        screening,probability,native,windows=discover_native(self,image)
+        proposals=native_proposals(native,self.screen_shape,
+            threshold=self.native_proposal_threshold,maximum=self.num_queries)
+        return screening,probability,(native>=.5).cpu(),windows,proposals
 
     def forward(
         self,
@@ -74,8 +114,9 @@ class WholeCTJointModelV5(WholeCTJointModelV3):
         image_hu = batch.get('image_hu') if image_hu is None and batch is not None else image_hu
         if image_hu is None or image_hu.shape != image.shape or image_hu.device.type != 'cpu':
             raise ValueError('Provide original image_hu on the same CPU 1-mm grid as image')
-        screening, vista_probability, discovered, window_count = self.discover(image)
-        detr_object, boxes_batched, masks_batched, queries_batched = self.detr(screening)
+        screening, vista_probability, discovered, window_count, native = self.detection_inputs(image)
+        prediction=self.detr(screening,native) if native is not None else self.detr(screening)
+        detr_object, boxes_batched, masks_batched, queries_batched = prediction
         object_logits = detr_object[0]
         boxes = boxes_batched[0]
         coarse_logits = masks_batched[0]
@@ -92,7 +133,7 @@ class WholeCTJointModelV5(WholeCTJointModelV3):
             raise ValueError('Object threshold must be in [0, 1]')
         # Prediction-only selection is identical with and without annotations.
         # Hungarian assignment below supplies loss labels, not extra candidates.
-        predicted_query = (object_logits.sigmoid() >= threshold).nonzero().flatten()
+        predicted_query = self.select_detection_queries(object_logits,coarse_logits,threshold)
         if batch is not None:
             target_boxes = batch['target_boxes'].to(self.device, non_blocking=True)
             target_masks = batch['target_masks'].to(self.device, non_blocking=True)
@@ -102,9 +143,18 @@ class WholeCTJointModelV5(WholeCTJointModelV3):
                     object_logits, boxes, coarse_logits, match, batch)
             else:
                 refined_query = predicted_query
-                target_for_query = torch.full_like(object_logits, -1, dtype=torch.long)
-                target_for_query[match.query_indices] = match.target_indices
-                refined_target = target_for_query[refined_query]
+                if self.detector_kind in ('mask_guided','native_seeded'):
+                    # Deduplication can keep a different representative of an
+                    # instance. Assign loss labels to retained predictions; GT
+                    # never changes which queries/crops enter the forward path.
+                    retained = match_coarse(object_logits[refined_query],boxes[refined_query],
+                        coarse_logits[refined_query],target_boxes,target_masks)
+                    refined_target = torch.full_like(refined_query,-1)
+                    refined_target[retained.query_indices] = retained.target_indices
+                else:
+                    target_for_query = torch.full_like(object_logits, -1, dtype=torch.long)
+                    target_for_query[match.query_indices] = match.target_indices
+                    refined_target = target_for_query[refined_query]
         else:
             empty = torch.empty(0, dtype=torch.long, device=self.device)
             match = Match(empty, empty)
@@ -172,12 +222,24 @@ class WholeCTJointModelV5(WholeCTJointModelV3):
             coarse_roi = sample_global_at_roi(
                 coarse_logits[query_index][None, None], origin, scan_shape, self.roi_shape
             )
+            if native is not None and query_index<self.detr.seeded_count(native):
+                from .native_proposals import native_roi
+                # Preserve small structures in the prior while retaining the
+                # learned DETR mask residual and its diagnostic gradients.
+                residual=coarse_logits[query_index]-native.coarse_logits[query_index]
+                coarse_roi=native_roi(native,query_index,origin,self.roi_shape)+sample_global_at_roi(
+                    residual[None,None],origin,scan_shape,self.roi_shape)
             vista_roi = sample_global_at_roi(
                 vista_probability, origin, scan_shape, self.roi_shape
             )
             context_roi = sample_global_at_roi(
                 context.float(), origin, scan_shape, self.roi_shape
             )
+            refiner_query=queries[query_index][None]
+            if self.refiner_conditioning is not None:
+                gains=self.refiner_conditioning.tanh()
+                vista_roi=vista_roi*gains[0]
+                context_roi=context_roi*gains[1]
             ct_gpu = ct_patch.unsqueeze(0).to(self.device, non_blocking=True).float()
             valid_gpu = valid.unsqueeze(0).to(self.device, non_blocking=True).float()
             # grid_sample pads with numeric zero, but zero is a 0.5 mask
@@ -189,9 +251,9 @@ class WholeCTJointModelV5(WholeCTJointModelV3):
             )
             with torch.autocast(device_type=self.device.type, enabled=self.device.type == "cuda", dtype=self.amp_dtype):
                 if self.training and self.use_checkpoint:
-                    delta = checkpoint(self.refiner, fine_input, queries[query_index][None], use_reentrant=False)
+                    delta = checkpoint(self.refiner, fine_input, refiner_query, use_reentrant=False)
                 else:
-                    delta = self.refiner(fine_input, queries[query_index][None])
+                    delta = self.refiner(fine_input, refiner_query)
             fine_logit = (coarse_roi + delta.float()) * valid_gpu + (-12.0) * (
                 1.0 - valid_gpu
             )

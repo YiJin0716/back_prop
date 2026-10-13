@@ -9,7 +9,7 @@ from back_prop.common.roi import integer_crop, paste_compact_mask
 from back_prop.common.train_utils import atomic_save
 from .augmentation import official_view
 from .semantic_metrics import semantic_metrics, semantic_failures
-from .preparation import SCHEMA, preparation_restore, preparation_save, run_geometry_warmup
+from .preparation import SCHEMA
 
 def official_row(model, batch, index):
     """Use exact binary official mask on the same 1-mm grid as joint training."""
@@ -95,7 +95,7 @@ def audit_semantics(model, args, cache_dir=None, *, reference=None):
     was_training = model.semantics.training
     model.semantics.eval()
     try:
-        for domain, directory in [('centered','official_warmup'), ('predicted','predicted_warmup')]:
+        for domain, directory in [('centered','official_warmup')]:
             paths = sorted((root/directory).glob('*.pt'))
             order = torch.randperm(len(paths), generator=torch.Generator().manual_seed(args.seed+415))
             rows = [torch.load(paths[int(i)], map_location='cpu', weights_only=False)
@@ -122,10 +122,10 @@ def audit_semantics(model, args, cache_dir=None, *, reference=None):
 
 
 @torch.no_grad()
-def build_caches(model, dataset, args, rank, world, root):
-    official, predicted = root/'official_warmup', root/'predicted_warmup'
+def build_prediction_cache(model, dataset, args, rank, world, root):
+    official, predicted = root/'official_warmup', root/'joint_prediction_rois'
     official.mkdir(parents=True,exist_ok=True); predicted.mkdir(parents=True,exist_ok=True)
-    marker = root/'semantic_cache_complete.json'
+    marker = root/'joint_prediction_cache_complete.json'
     if marker.exists():
         record = json.loads(marker.read_text())
         if record.get('schema') != SCHEMA:
@@ -135,8 +135,9 @@ def build_caches(model, dataset, args, rank, world, root):
     for index in range(rank,len(dataset),world):
         batch = dataset[index]
         for j in range(len(batch['nodule_ids'])):
-            row = official_row(model,batch,j)
-            atomic_save(row,official/f"{row['key'][0]}__nodule{row['key'][1]}.pt")
+            path = official/f"{batch['case_id']}__nodule{int(batch['nodule_ids'][j])}.pt"
+            if not path.exists():
+                raise RuntimeError('Official warmup cache must exist before joint initialization')
         # GT supplies matching and loss flags only; eval routing uses predictions.
         out = model(batch['image'],batch=batch,compute_diagnostics=False,update_bank=False)
         assert out.teacher_forced_count == out.fallback_count == 0
@@ -153,7 +154,7 @@ def build_caches(model, dataset, args, rank, world, root):
                 histogram=batch['semantic_histograms'][target],semantics=batch['semantic_targets'][target],
                 label=batch['malignancy_targets'][target],soft_dice=float(out.fine_soft_dice[i])),
                 predicted/f'{key[0]}__nodule{key[1]}.pt')
-        print(json.dumps(dict(event='semantic_cache',rank=rank,case_id=batch['case_id'],
+        print(json.dumps(dict(event='joint_prediction_cache',rank=rank,case_id=batch['case_id'],
                               official=len(batch['nodule_ids']),predicted=len(valid_rows))),flush=True)
     if world>1:
         dist.barrier()
@@ -187,65 +188,5 @@ def fit_prediction_bank(model, paths, rank, world):
 
 
 def run_warmup(model,dataset,args,rank,world,monitor):
-    saved=preparation_restore(model,args,rank,world)
-    geometry=run_geometry_warmup(model,dataset,args,rank,world,monitor,saved)
-    root=Path(saved['cache_root']) if saved and saved['phase']!='geometry' else args.output_dir
-    if saved and saved['phase']=='ready':
-        model.requires_grad_(True)
-        return saved['warmup']
-    model.requires_grad_(False);model.semantics.requires_grad_(True)
-    official,predicted=build_caches(model,dataset,args,rank,world,root)
-    predicted_paths=sorted(predicted.glob('*.pt'))
-    if len(predicted_paths)<args.bank_min_samples:
-        raise RuntimeError('Insufficient usable predicted ROIs for semantic/risk preparation')
-    samples=SemanticROIs(sorted(official.glob('*.pt'))+predicted_paths,args.teacher_jitter)
-    sampler=DistributedSampler(samples,num_replicas=world,rank=rank,seed=args.seed+171)
-    loader=DataLoader(samples,batch_size=args.warmup_batch_size,sampler=sampler,num_workers=0)
-    sem=model.semantics
-    wrapped=DistributedDataParallel(sem,broadcast_buffers=False) if world>1 else sem
-    optimizer=torch.optim.AdamW(sem.parameters(),lr=args.lr_semantic_warmup,weight_decay=args.weight_decay)
-    start=0;history=[];ready=False
-    if saved and saved['phase']=='semantic':
-        optimizer.load_state_dict(saved['optimizer']);start=saved['epoch']+1
-        history=saved.get('history',[])
-    for epoch in range(start,args.warmup_epochs):
-        sampler.set_epoch(epoch);wrapped.train();sums=torch.zeros(2,device=model.device,dtype=torch.float64)
-        for step,(roi,histogram) in enumerate(loader,1):
-            optimizer.zero_grad(set_to_none=True)
-            probability,_=wrapped(roi.to(model.device),prepared=True)
-            loss=-(histogram.to(model.device)*probability.clamp_min(1e-7).log()).sum(-1).mean()
-            if not torch.isfinite(loss):raise FloatingPointError('Nonfinite semantic warmup loss')
-            loss.backward();torch.nn.utils.clip_grad_norm_(sem.parameters(),5.,error_if_nonfinite=True)
-            optimizer.step();sums+=sums.new_tensor([float(loss.detach())*len(roi),len(roi)])
-            if args.preparation_smoke and step>=args.benchmark_steps:break
-        if world>1:dist.all_reduce(sums)
-        audit=audit_semantics(model,args,official)
-        record=dict(epoch=epoch+1,nll=float(sums[0]/sums[1]),audit=audit)
-        history.append(record)
-        ready=epoch+1>=args.semantic_min_epochs and audit['passed']
-        if args.preparation_smoke:ready=True
-        if rank==0:
-            print(json.dumps(dict(event='semantic_warmup_epoch',**record)),flush=True)
-            monitor.log({'warmup_epoch':geometry['epochs']+epoch+1,
-                'semantic_warmup/epoch':epoch+1,'semantic_warmup/nll':record['nll'],
-                **{f'semantic_warmup/{k}_nll':v['nll'] for k,v in audit['domains'].items()}})
-        preparation_save(model,optimizer,args,rank,world,phase='semantic',epoch=epoch,
-            geometry=geometry,history=history,cache_root=str(root.resolve()))
-        if ready:break
-    del wrapped,optimizer
-    if not ready:
-        raise RuntimeError('Semantic readiness not reached; inspect warmup metrics. preparation.pt preserves progress.')
-    fit_prediction_bank(model,predicted_paths,rank,world)
-    result=dict(schema=SCHEMA,complete=True,smoke_only=args.preparation_smoke,epochs=epoch+1,
-        official_nodules=len(list(official.glob('*.pt'))),predicted_nodules=len(predicted_paths),
-        cache_dir=str(official.resolve()),predicted_cache_dir=str(predicted.resolve()),geometry=geometry,
-        semantic_reference=audit['domains'],history=history,
-        baseline_samples=len(model.rashomon.radiomics_memory),semantic_samples=len(model.rashomon.memory))
-    preparation_save(model,None,args,rank,world,phase='ready',epoch=epoch,geometry=geometry,
-                     warmup=result,cache_root=str(root.resolve()))
-    if rank==0:
-        (args.output_dir/'warmup.json').write_text(json.dumps(result,indent=2)+'\n')
-        atomic_save(dict(semantics=sem.state_dict(),risk=model.rashomon.state_dict(),audit=result),
-                    args.output_dir/'warmup.pt')
-    model.requires_grad_(True)
-    return result
+    from .parallel_warmup import run_parallel_warmup
+    return run_parallel_warmup(model,dataset,args,rank,world,monitor)

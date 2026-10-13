@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 from .build import HERE_CV, PLOTS
 from .statistics import MODELS, save_results
-from ..cohort import HERE, load, sha256
+from ..cohort import HERE, load, sha256, configuration_path
 from ..evaluate_roc import write_json
 from back_prop.common.source_compat import source_matches
 
@@ -15,8 +15,8 @@ def main():
     item = plan['folds'][0]; original = load(); current = load(item['cohort'])
     for key in ('splits', 'manifest_sha256', 'annotations_sha256', 'policy', 'training_case_keys_sha256'):
         assert original[key] == current[key], key
-    old_config = json.loads(Path(original['v3_config']).read_text())
-    new_config = json.loads(Path(current['v3_config']).read_text())
+    old_config = json.loads(configuration_path(original['v3_config']).read_text())
+    new_config = json.loads(configuration_path(current['v3_config']).read_text())
     differences = [k for k in old_config.keys() | new_config.keys() if old_config.get(k) != new_config.get(k)]
     assert set(differences) <= {'runtime', 'output_dir', 'resume', 'source_sha256'}
     source = HERE / 'plots'; output = PLOTS / 'fold_0'

@@ -10,14 +10,15 @@ from back_prop.model_v5.features import CNNSemantics, check_semantic_spread
 from back_prop.tests.model_fixtures import TinySegmenter, make_batch
 
 
-def tiny():
+def tiny(detector_kind='legacy'):
     torch.manual_seed(9)
     with patch('back_prop.common.semantic_model.MedicalNetSemantics', side_effect=AssertionError('MedicalNet constructed')):
         model = WholeCTJointModelV5(window_size=(8,8,8), screen_shape=(8,8,8), roi_shape=(8,8,8),
             num_queries=4, detr_hidden_dim=16, detr_coarse_shape=(4,4,4), detr_nheads=4,
             detr_encoder_layers=1, detr_decoder_layers=1, vista_feature_dim=1, context_channels=2,
             refiner_base_channels=2, hard_negatives=1, teacher_jitter=0,
-            segmenter_factory=TinySegmenter, semantic_roi_size=8, semantic_width=4, use_checkpoint=False)
+            segmenter_factory=TinySegmenter, semantic_roi_size=8, semantic_width=4, use_checkpoint=False,
+            detector_kind=detector_kind)
     model.semantic_min_dice = 0.  # Existing tests isolate coverage, not mask quality.
     torch.nn.init.normal_(model.refiner.residual_head.weight, std=.01)
     batch=make_batch()
@@ -35,6 +36,38 @@ class V5Tests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         torch.set_num_threads(2)
+
+    def test_native_warmup_loads_for_segmentation_without_claiming_fitted_risk(self):
+        from back_prop.evaluate.eval_package.inference import load_joint_model
+        model,batch=tiny('native_seeded')
+        model.eval()
+        model.detr.confidence_residual_bound=2.
+        with torch.no_grad():model.detr.native_prediction.bias[0]=3.
+        model.rashomon.count.zero_();model.rashomon.baseline_count.zero_()
+        config=dict(window_size=(8,8,8),screen_shape=(8,8,8),roi_shape=(8,8,8),
+            num_queries=4,detr_hidden_dim=16,detr_coarse_shape=(4,4,4),detr_nheads=4,
+            detr_encoder_layers=1,detr_decoder_layers=1,vista_feature_dim=1,context_channels=2,
+            refiner_base=2,hard_negatives=1,teacher_jitter=0,semantic_roi_size=8,semantic_width=4,
+            detector_kind='native_seeded',semantic_min_dice=0.,native_confidence_residual_bound=2.)
+        with tempfile.TemporaryDirectory() as directory:
+            path=Path(directory)/'geometry.pt'
+            torch.save(dict(model=model.state_dict(),architecture=ARCHITECTURE,config=config,
+                            epoch=-1,phase='independent_warmup'),path)
+            with patch('back_prop.evaluate.eval_package.inference._uninitialized_segmenter',TinySegmenter):
+                with self.assertRaisesRegex(ValueError,'no fitted Rashomon'):
+                    load_joint_model(path,device='cpu')
+                restored=load_joint_model(path,device='cpu',require_risk_bank=False)
+            self.assertFalse(restored.evaluation_metadata['risk_bank_ready'])
+            self.assertEqual(restored.detr.confidence_residual_bound,2.)
+            self.assertEqual(restored.evaluation_metadata['phase'],'independent_warmup')
+            kwargs=dict(image_hu=batch['image_hu'],segmentation_only=True,object_threshold=0.)
+            with torch.no_grad():
+                before=model(batch['image'],**kwargs)
+                after=restored(batch['image'],**kwargs)
+            for name in ('object_logits','boxes','fine_mask_logits'):
+                torch.testing.assert_close(getattr(before,name),getattr(after,name),atol=0,rtol=0)
+            with torch.no_grad(),self.assertRaisesRegex(RuntimeError,'Fit or load both'):
+                restored(batch['image'],image_hu=batch['image_hu'])
 
     def test_cnn_mask_gradient_and_batch_independence(self):
         torch.manual_seed(3)
@@ -119,6 +152,87 @@ class V5Tests(unittest.TestCase):
         self.assertEqual(c['loss_counts']['box_l1'],10)
         valid.total.backward()
         self.assertGreater(float(next(m.semantics.encoder.parameters()).grad.abs().sum()),0)
+
+    def test_box_l1_uses_the_same_coordinate_sum_as_matching(self):
+        m,b=tiny();m.eval()
+        o=m(b['image'],batch=b,update_bank=False)
+        q,t=o.matched_query_indices,o.matched_target_indices
+        o.boxes=o.boxes.detach().clone()
+        o.boxes[q]=b['target_boxes'][t]+.1
+        self.assertAlmostEqual(WholeCTCriterionV5()(o,b).mean('box_l1'),.6,places=6)
+
+    def test_unmatched_object_scores_are_suppressed(self):
+        m,b=tiny();m.eval()
+        o=m(b['image'],batch=b,update_bank=False)
+        o.object_logits=o.object_logits.detach().requires_grad_(True)
+        loss=WholeCTCriterionV5()(o,b)
+        loss.numerators['object'].backward()
+        q=o.matched_query_indices
+        unmatched=torch.ones_like(o.object_logits,dtype=torch.bool);unmatched[q]=False
+        self.assertEqual(loss.counts['object'],len(o.object_logits))
+        self.assertTrue((o.object_logits.grad[unmatched]>0).all())
+        self.assertTrue((o.object_logits.grad[q]<0).all())
+        # An excluded/indeterminate annotation must not become background.
+        i=int(unmatched.nonzero()[0])
+        b['ignored_target_boxes']=o.boxes[i:i+1].detach().clone()
+        b['ignored_target_masks']=(o.coarse_mask_logits[i:i+1].detach()>0).byte()
+        o.object_logits.grad=None
+        loss=WholeCTCriterionV5()(o,b)
+        loss.numerators['object'].backward()
+        self.assertEqual(float(o.object_logits.grad[i]),0.)
+
+    def test_overlap_penalty_rejects_broad_masks_and_keeps_missed_nodule_gradients(self):
+        from back_prop.model_v5.loss import nodule_overlap_loss
+        target=torch.zeros(1,1024);target[:,0]=1.
+        correct=torch.full_like(target,-20.);correct[:,0]=20.
+        broad=torch.full_like(target,8.,requires_grad=True)
+        self.assertLess(float(nodule_overlap_loss(correct,target)),1e-5)
+        self.assertGreater(float(nodule_overlap_loss(broad,target).detach()),6.)
+        nodule_overlap_loss(broad,target).sum().backward()
+        self.assertGreater(float(broad.grad[0,1:].sum()),0.)
+        missed=torch.full_like(target,-100.,requires_grad=True)
+        loss=nodule_overlap_loss(missed,target)
+        self.assertTrue(torch.isfinite(loss).all())
+        loss.sum().backward()
+        self.assertLess(float(missed.grad[0,0]),-.9)
+        valid=target.bool()
+        self.assertLess(float(nodule_overlap_loss(broad,target,valid=valid).detach()),.001)
+
+    def test_coarse_supervision_excludes_ignored_regions(self):
+        m,b=tiny();m.eval()
+        o=m(b['image'],batch=b,update_bank=False)
+        b['ignored_target_masks']=torch.ones_like(b['target_masks'])
+        a=WholeCTCriterionV5()(o,b)
+        q,t=o.matched_query_indices,o.matched_target_indices
+        logits=o.coarse_mask_logits.detach().clone()
+        for query,target in zip(q,t):
+            logits[query][~b['target_masks'][target].bool()]=20.
+        o.coarse_mask_logits=logits
+        c=WholeCTCriterionV5()(o,b)
+        for name in ('coarse_dice','coarse_focal'):
+            self.assertAlmostEqual(a.mean(name),c.mean(name),places=6)
+
+    def test_overlap_penalty_has_no_positive_only_object_gradient(self):
+        m,b=tiny();m.eval()
+        o=m(b['image'],batch=b,update_bank=False)
+        a=WholeCTCriterionV5()(o,b).mean('missing_nodule')
+        o.object_logits=torch.full_like(o.object_logits,-20.)
+        self.assertAlmostEqual(a,WholeCTCriterionV5()(o,b).mean('missing_nodule'),places=6)
+
+    def test_fixed_geometry_probe_reports_overlap_and_is_prediction_only(self):
+        from types import SimpleNamespace
+        from back_prop.model_v5.preparation import geometry_audit
+        m,b=tiny()
+        args=SimpleNamespace(seed=42,geometry_probe_cases=1,geometry_min_coverage=0.,
+                             geometry_min_dice=0.,geometry_min_coarse_dice=0.,geometry_min_usable=0.)
+        result=geometry_audit(m,[b],args,0,1)
+        for name in ('coarse_dice','coarse_precision','coarse_recall','box_iou'):
+            self.assertGreaterEqual(result[name],0.)
+            self.assertLessEqual(result[name],1.)
+        self.assertEqual(result['nodules'],1)
+        self.assertFalse(m.training)
+        args.geometry_min_coarse_dice=1.
+        self.assertFalse(geometry_audit(m,[b],args,0,1)['passed'])
 
     def test_checkpoint_loader_uses_cnn_without_medicalnet(self):
         from back_prop.evaluate.eval_package.inference import load_joint_model
@@ -217,9 +331,49 @@ class V5Tests(unittest.TestCase):
         metrics['correlation']=[0.]*6
         self.assertTrue(any('correlation' in f for f in semantic_failures({'predicted':metrics})))
 
-    def test_geometry_teacher_reaches_prediction_only_before_readiness(self):
-        from back_prop.model_v5.preparation import geometry_teacher
-        self.assertEqual([geometry_teacher(i,5) for i in range(7)],[1.,.75,.5,.25,0.,0.,0.])
+    def test_extended_warmup_requires_minimum_and_sustained_readiness(self):
+        from back_prop.model_v5.preparation import WarmupReadiness
+        geometry=WarmupReadiness(15,3)
+        decisions=[geometry.update(epoch,True)
+                   for epoch in range(1,16)]
+        self.assertFalse(any(decisions[:-1]))
+        self.assertTrue(decisions[-1])
+        # One passing epoch at the minimum cannot release the semantic stage.
+        semantic=WarmupReadiness(20,3)
+        for epoch in range(1,20):
+            self.assertFalse(semantic.update(epoch,False))
+        self.assertFalse(semantic.update(20,True))
+        self.assertFalse(semantic.update(21,False))
+        self.assertFalse(semantic.update(22,True))
+        self.assertFalse(semantic.update(23,True))
+        resumed=WarmupReadiness(20,3,semantic.consecutive_passes)
+        self.assertTrue(resumed.update(24,True))
+
+    def test_joint_guard_uses_regression_not_the_warmup_admission_cutoff(self):
+        from copy import deepcopy
+        from back_prop.model_v5.semantic_metrics import semantic_failures
+        reference=dict(samples=128,target_std=[.76]*6,predicted_std=[.134]*6,
+                       std_ratio=[.176]*6,correlation=[.5]*6,nll=1.09,prior_nll=1.18)
+        current=deepcopy(reference)
+        current.update(predicted_std=[.103]*6,std_ratio=[.135]*6)
+        self.assertTrue(semantic_failures({'shifted':current}))
+        self.assertEqual(semantic_failures({'shifted':current},reference={'shifted':reference}),[])
+        # A real loss of half the signal remains a stop condition.
+        current.update(predicted_std=[.06]*6,std_ratio=[.079]*6)
+        self.assertTrue(any('half' in f for f in semantic_failures(
+            {'shifted':current},reference={'shifted':reference})))
+
+    def test_semantic_guard_rejects_nonfinite_and_attribute_regression(self):
+        from copy import deepcopy
+        from back_prop.model_v5.semantic_metrics import semantic_failures
+        reference=dict(samples=128,target_std=[1.]*6,predicted_std=[.5]*6,
+                       std_ratio=[.5]*6,correlation=[.5]*6,nll=1.,prior_nll=1.2,
+                       nll_by_attribute=[1.]*6)
+        current=deepcopy(reference);current['nll']=float('nan')
+        self.assertTrue(any('nonfinite' in f for f in semantic_failures({'centered':current})))
+        current=deepcopy(reference);current['nll_by_attribute'][2]=1.2
+        self.assertTrue(any('sphericity: NLL' in f for f in semantic_failures(
+            {'centered':current},reference={'centered':reference})))
 
     def test_official_jitter_crops_before_resizing(self):
         from back_prop.model_v5.augmentation import official_view

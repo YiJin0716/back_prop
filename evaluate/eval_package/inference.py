@@ -51,12 +51,16 @@ def _uninitialized_encoder():
     return Encoder()
 
 
-def load_joint_model(checkpoint, *, device="cuda"):
+def load_joint_model(checkpoint, *, device="cuda", require_risk_bank=True):
     """Restore a trusted training checkpoint, strictly, without refitting.
 
     Supports V2, V3, V3_anneal, V3_hard, V4 and V5. Full weights are restored without
     needing the original VISTA/MedicalNet initialization checkpoint files.
     The returned model is in eval mode and carries checkpoint provenance.
+
+    Set require_risk_bank=False to inspect a V5 warmup checkpoint through its
+    segmentation_only forward, or compute_diagnostics=False for semantic outputs.
+    This does not fit a risk model or enable malignancy evaluation.
     """
     import torch
 
@@ -94,6 +98,10 @@ def load_joint_model(checkpoint, *, device="cuda"):
             kwargs.update(semantic_roi_size=config.get('semantic_roi_size', 64),
                           semantic_width=config.get('semantic_width', 16),
                           semantic_min_dice=config.get('semantic_min_dice', 0.),
+                          detector_kind=config.get('detector_kind','legacy'),
+                          detector_nms_iou=config.get('detector_nms_iou',.5),
+                          native_proposal_threshold=config.get('native_proposal_threshold',.1),
+                          native_confidence_residual_bound=config.get('native_confidence_residual_bound'),
                           baseline_l2=state['baseline_l2'])
         else:
             kwargs.update(encoder_factory=_uninitialized_encoder,
@@ -111,15 +119,18 @@ def load_joint_model(checkpoint, *, device="cuda"):
     module, name = ARCHITECTURES[architecture]
     model = getattr(importlib.import_module(module), name)(**kwargs)
     model.load_state_dict(saved["model"], strict=True)
-    if has_bank and not int(model.rashomon.count):
+    if require_risk_bank and has_bank and not int(model.rashomon.count):
         raise ValueError("Checkpoint has no fitted Rashomon bank; malignancy inference is unavailable")
-    if (is_v4 or is_v5) and not int(model.rashomon.baseline_count):
+    if require_risk_bank and (is_v4 or is_v5) and not int(model.rashomon.baseline_count):
         raise ValueError("Checkpoint has no fitted radiomics baseline")
     model.evaluation_metadata = {
         "checkpoint": str(Path(checkpoint).resolve()), "architecture": architecture,
         "epoch": int(saved["epoch"]) + 1,
         "training_manifest": str(config["manifest"]) if config.get("manifest") is not None else None,
         "amp_dtype": config.get("amp_dtype", "bfloat16" if has_bank else "float16"),
+        "phase": saved.get("phase", "joint_training"),
+        "risk_bank_ready": (bool(int(model.rashomon.count)) and
+                            (not (is_v4 or is_v5) or bool(int(model.rashomon.baseline_count)))) if has_bank else None,
     }
     return model.to(device).eval()
 

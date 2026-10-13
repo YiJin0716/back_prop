@@ -21,12 +21,12 @@ from torch.utils.data import DataLoader, DistributedSampler
 
 from back_prop.lidc_policy import POLICY_NAME
 from back_prop.common.semantic_data import DEFAULT_MANIFEST, WholeCTLIDCDataset, load_cases, whole_ct_collate
-from .loss import WholeCTCriterionV5, LossAccumulator
+from .loss import WholeCTCriterionV5, LossAccumulator, LOSS_SCHEMA
 from .model import ARCHITECTURE, WholeCTJointModelV5
 from back_prop.common.schedule import LearningRateSchedule, make_lr_scheduler, assert_learning_rates
 from .features import NORMALIZATION, CONVOLUTION
 from .warmup import run_warmup, AnchorStream
-from .preparation import SCHEMA
+from .preparation import SCHEMA, geometry_audit
 from .monitor import Monitor, epoch_metrics
 from .warmup import audit_semantics
 from .diagnostics import SemanticAccumulator
@@ -35,14 +35,23 @@ from back_prop.common.checkpoint_compat import adapt_cuda_rng_state
 from back_prop.common.base_model import DEFAULT_VISTA_CHECKPOINT
 
 
-def parse_args() -> argparse.Namespace:
+def parse_args(argv=None) -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     parser.add_argument("--vista-checkpoint", type=Path, default=DEFAULT_VISTA_CHECKPOINT)
     parser.add_argument("--semantic-roi-size", type=int, default=64)
     parser.add_argument("--semantic-width", type=int, default=16)
     parser.add_argument("--inference-object-threshold", type=float, default=.5)
+    parser.add_argument('--detector-kind',choices=('legacy','mask_guided','native_seeded'),
+                        help='Defaults to the checkpoint variant on resume/restart, otherwise legacy')
+    parser.add_argument('--native-proposal-threshold',type=float)
+    parser.add_argument('--native-confidence-residual-bound',type=float,
+                        help='Optional maximum learned native confidence correction in log odds')
+    parser.add_argument('--detector-nms-iou',type=float)
+    parser.add_argument('--object-background-weight',type=float)
     parser.add_argument("--init-v2", type=Path)
+    parser.add_argument('--restart-from', type=Path,
+        help='Initialize network weights from V5, then rerun preparation with fresh optimizers and risk banks')
     parser.add_argument("--amp-dtype", choices=['bfloat16', 'float16'], default='bfloat16')
     parser.add_argument("--sparsity", type=int, default=5)
     parser.add_argument("--coefficient-bound", type=float, default=5.0)
@@ -81,14 +90,21 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--lr-vista", type=float, default=1e-6)
     parser.add_argument("--lr-semantic", type=float, default=3e-5)
     parser.add_argument('--lr-semantic-warmup', type=float, default=3e-4)
-    parser.add_argument('--geometry-min-epochs', type=int, default=5)
-    parser.add_argument('--geometry-max-epochs', type=int, default=10)
+    parser.add_argument('--refiner-min-epochs', type=int, default=15)
+    parser.add_argument('--refiner-max-epochs', type=int, default=30)
+    parser.add_argument('--refiner-probe-nodules', type=int, default=64)
+    parser.add_argument('--refiner-min-dice', type=float, default=.5)
+    parser.add_argument('--geometry-min-epochs', type=int, default=15)
+    parser.add_argument('--geometry-max-epochs', type=int, default=30)
+    parser.add_argument('--warmup-ready-epochs', type=int, default=3,
+                        help='Consecutive passing audits required to finish each warmup stage')
     parser.add_argument('--geometry-probe-cases', type=int, default=32)
     parser.add_argument('--geometry-min-coverage', type=float, default=.75)
     parser.add_argument('--geometry-min-dice', type=float, default=.25)
+    parser.add_argument('--geometry-min-coarse-dice', type=float, default=.1)
     parser.add_argument('--geometry-min-usable', type=float, default=.5)
     parser.add_argument('--semantic-min-dice', type=float, default=.3)
-    parser.add_argument('--semantic-min-epochs', type=int, default=8)
+    parser.add_argument('--semantic-min-epochs', type=int, default=20)
     parser.add_argument('--semantic-probe-nodules', type=int, default=128)
     parser.add_argument('--semantic-min-std-ratio', type=float, default=.15)
     parser.add_argument('--semantic-min-correlation', type=float, default=.25)
@@ -97,6 +113,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument('--semantic-anchor-batch-size', type=int, default=4)
     parser.add_argument('--semantic-guard-patience', type=int, default=2)
     parser.add_argument('--prepare-resume', type=Path)
+    parser.add_argument('--detr-feature-cache', type=Path,
+        help='Validated frozen raw VISTA maps; used only by independent DETR warmup')
     parser.add_argument('--preparation-smoke', action='store_true',
                         help='Limited pipeline test only; bypass preparation readiness gates')
     parser.add_argument("--weight-decay", type=float, default=1e-5)
@@ -121,14 +139,35 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--skip-save", action="store_true")
     parser.add_argument("--benchmark-steps", type=int,
                         help="Stop after this many synchronized steps; requires --skip-save")
-    parser.add_argument('--warmup-epochs', type=int, default=20,
+    parser.add_argument('--warmup-epochs', type=int, default=40,
                         help='Maximum augmented semantic preparation epochs')
     parser.add_argument('--warmup-batch-size', type=int, default=8)
     parser.add_argument('--wandb-mode', choices=['online','offline','disabled'], default='online')
     parser.add_argument('--wandb-entity', default='jin20020716-duke-university')
     parser.add_argument('--wandb-project', default='imaging-feature')
     parser.add_argument('--wandb-name')
-    return parser.parse_args()
+    args = parser.parse_args(argv)
+    # A repaired checkpoint must construct the same detector before its weights
+    # are loaded. Preserve historical checkpoints that predate these options.
+    checkpoint = args.resume or args.prepare_resume or args.restart_from
+    saved_config = (torch.load(checkpoint, map_location='cpu', weights_only=False,
+                               mmap=True).get('config', {}) if checkpoint else {})
+    for name, fallback, convert in (
+        ('detector_kind', 'legacy', str),
+        ('native_proposal_threshold', .1, float),
+        ('detector_nms_iou', .5, float),
+        ('object_background_weight', 1., float),
+    ):
+        if getattr(args, name) is None:
+            setattr(args, name, convert(saved_config.get(name, fallback)))
+    if args.detector_kind not in ('legacy', 'mask_guided', 'native_seeded'):
+        parser.error('Checkpoint specifies an unsupported detector kind')
+    if args.native_confidence_residual_bound is None:
+        bound=saved_config.get('native_confidence_residual_bound')
+        args.native_confidence_residual_bound=None if bound in (None,'None') else float(bound)
+    if args.native_confidence_residual_bound is not None and args.native_confidence_residual_bound<=0:
+        parser.error('Native confidence residual bound must be positive')
+    return args
 
 
 from back_prop.common.train_utils import (
@@ -166,16 +205,19 @@ def main() -> None:
     if args.preparation_smoke and not (args.max_cases and args.benchmark_steps and args.skip_save):
         raise ValueError('--preparation-smoke requires --max-cases, --benchmark-steps and --skip-save')
     if not (1 <= args.geometry_min_epochs <= args.geometry_max_epochs
-            and 1 <= args.semantic_min_epochs <= args.warmup_epochs):
+            and 1 <= args.semantic_min_epochs <= args.warmup_epochs
+            and 1 <= args.refiner_min_epochs <= args.refiner_max_epochs):
         raise ValueError('Preparation epoch bounds are invalid')
     if min(args.semantic_anchor_batch_size,args.geometry_probe_cases,args.semantic_probe_nodules,
-           args.semantic_guard_patience) < 1:
+           args.semantic_guard_patience,args.warmup_ready_epochs,args.refiner_probe_nodules) < 1:
         raise ValueError('Preparation/probe/anchor sizes and guard patience must be positive')
-    for key in ('geometry_min_coverage','geometry_min_dice','geometry_min_usable',
-                'semantic_min_dice','semantic_min_std_ratio','semantic_min_correlation'):
+    if args.warmup_ready_epochs > min(args.geometry_max_epochs,args.refiner_max_epochs,args.warmup_epochs):
+        raise ValueError('Warmup epoch limits must allow consecutive passing audits')
+    for key in ('geometry_min_coverage','geometry_min_dice','geometry_min_coarse_dice','geometry_min_usable',
+                'refiner_min_dice','semantic_min_dice','semantic_min_std_ratio','semantic_min_correlation'):
         if not 0 <= getattr(args,key) <= 1:
             raise ValueError(f'{key} must be in [0, 1]')
-    if sum(p is not None for p in (args.resume,args.prepare_resume,args.init_v2)) > 1:
+    if sum(p is not None for p in (args.resume,args.prepare_resume,args.init_v2,args.restart_from)) > 1:
         raise ValueError('Choose joint resume, preparation resume, or geometry initialization')
     if not 0 <= args.inference_object_threshold <= 1:
         raise ValueError('Object threshold must be in [0, 1]')
@@ -251,6 +293,10 @@ def main() -> None:
         semantic_width=args.semantic_width,
         semantic_min_dice=args.semantic_min_dice,
         inference_object_threshold=args.inference_object_threshold,
+        detector_kind=args.detector_kind,
+        detector_nms_iou=args.detector_nms_iou,
+        native_proposal_threshold=args.native_proposal_threshold,
+        native_confidence_residual_bound=args.native_confidence_residual_bound,
         amp_dtype=amp_dtype,
         baseline_l2=args.baseline_l2,
         bank_config=dict(sparsity=args.sparsity, bound=args.coefficient_bound,
@@ -267,10 +313,22 @@ def main() -> None:
                                                for k in incompatible.missing_keys):
             raise RuntimeError(f'Geometry warm-start mismatch: {incompatible}')
         del initial, shared
+    if args.restart_from:
+        initial = torch.load(args.restart_from, map_location='cpu', weights_only=False)
+        if initial.get('architecture') != ARCHITECTURE:
+            raise ValueError('--restart-from requires a V5 joint checkpoint')
+        if initial['config']['manifest_sha256'] != hashlib.sha256(args.manifest.read_bytes()).hexdigest():
+            raise ValueError('Restart training manifest differs from checkpoint')
+        shared = {k:v for k,v in initial['model'].items() if not k.startswith('rashomon.')}
+        incompatible = bare_model.load_state_dict(shared, strict=False)
+        if incompatible.unexpected_keys or any(not k.startswith('rashomon.') for k in incompatible.missing_keys):
+            raise RuntimeError(f'V5 restart network mismatch: {incompatible}')
+        del initial, shared
     bare_model.rashomon.allowed_cases = {f"{c['patient_id']}__scan{int(c['scan_id'])}" for c in dataset.cases}
     criterion = WholeCTCriterionV5(
         missing_nodule_weight=args.missing_nodule_weight,
         semantic_anchor_weight=args.semantic_anchor_weight,
+        object_background_weight=args.object_background_weight,
     ).to(device)
 
     vista_base_module = getattr(bare_model.segmenter, "model", None)
@@ -306,12 +364,14 @@ def main() -> None:
         saved = torch.load(args.resume, map_location="cpu", weights_only=False)
         if saved.get("architecture") != ARCHITECTURE:
             raise ValueError(f"Resume architecture mismatch: {saved.get('architecture')}")
+        if saved['config'].get('loss_schema') != LOSS_SCHEMA:
+            raise ValueError('Loss definitions changed; use --restart-from to rerun preparation in a new run')
         if saved['config'].get('variant') != variant:
             raise ValueError('Cannot resume a different training variant')
         saved_wandb = saved.get('wandb')
         warmup_state = saved.get('warmup')
         if not warmup_state or not warmup_state['complete'] or warmup_state.get('schema') != SCHEMA:
-            raise ValueError('Joint resume requires repaired staged preparation; old V5 remains inference-compatible')
+            raise ValueError('Joint resume requires parallel official-mask preparation; old V5 remains inference-compatible')
         if warmup_state.get('smoke_only') and not args.preparation_smoke:
             raise ValueError('Smoke preparation is not a production checkpoint')
         semantic_guard_failures = saved.get('semantic_guard_failures',0)
@@ -322,9 +382,11 @@ def main() -> None:
             raise ValueError('Resume LR schedule mismatch')
         if saved['config']['loss_weights'] != criterion.loss_weights:
             raise ValueError('Resume loss weights mismatch')
-        mutable = {'output_dir', 'resume', 'prepare_resume', 'init_v2', 'epochs', 'stop_after_epoch', 'save_every', 'wandb_name'}
+        mutable = {'output_dir', 'resume', 'prepare_resume', 'init_v2', 'restart_from', 'epochs', 'stop_after_epoch', 'save_every', 'wandb_name', 'detr_feature_cache'}
+        legacy_defaults={'detector_kind':'legacy','detector_nms_iou':.5,'object_background_weight':1.,
+                         'native_proposal_threshold':.1,'native_confidence_residual_bound':None}
         for name, value in vars(args).items():
-            if name not in mutable and str(value) != str(saved['config'][name]):
+            if name not in mutable and str(value) != str(saved['config'].get(name,legacy_defaults.get(name))):
                 raise ValueError(f'Resume argument mismatch: {name}')
         if saved['config']['world_size'] != world:
             raise ValueError('Resume requires the same number of ranks')
@@ -372,11 +434,13 @@ def main() -> None:
         "architecture": ARCHITECTURE,
         "variant": variant,
         "preparation_schema": SCHEMA,
+        "loss_schema": LOSS_SCHEMA,
         "semantic_normalization": NORMALIZATION,
         "semantic_convolution": CONVOLUTION,
         "ddp_output_handling": "registered WholeCTOutputV5 pytree; supports unused loss branches",
         "diagnostic_schedule": {"kind": "constant", "scale": 1.0, "start_epoch": 1},
         "world_size": world,
+        "warmup_policy": "concurrent DETR / refiner / semantic; official annotations only; disjoint optimizers",
         "manifest_sha256": hashlib.sha256(args.manifest.read_bytes()).hexdigest(),
         "lr_schedule": lr_schedule.state_dict(),
         "mask_temperature": 1.0,
@@ -507,6 +571,9 @@ def main() -> None:
         loss_record = accumulator.compute(criterion.loss_weights, diagnostic_scale=diag_scale)
         semantic_audit = audit_semantics(bare_model,args,warmup_state['cache_dir'],
                                         reference=warmup_state['semantic_reference'])
+        # Fixed CTs, frozen checkpoint and prediction-only routing make mask
+        # quality interpretable alongside changing training loss populations.
+        geometry_probe = geometry_audit(bare_model,dataset,args,rank,world)
         semantic_guard_failures = 0 if semantic_audit['passed'] else semantic_guard_failures+1
         # Online moments mix model states; fixed-checkpoint probes decide the
         # regression stop, after the epoch checkpoint has been preserved.
@@ -525,6 +592,7 @@ def main() -> None:
         if rank==0:
             record = dict(event='epoch',epoch=epoch+1,phase=phase,global_step=global_step,
                 **loss_record, semantic_audit=semantic_audit, predicted_semantic_audit=predicted_semantic_audit,
+                geometry_audit=geometry_probe,
                 semantic_guard_failures=semantic_guard_failures,
                 lr=epoch_lrs,next_lr={g['name']:g['lr'] for g in optimizer.param_groups},
                 diagnostic_scale=diag_scale,temperature=float(bare_model.mask_temperature),

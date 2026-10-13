@@ -19,7 +19,7 @@ V4 的 roivue 交互对比见 [v4_segmentation_roivue.ipynb](../visualize_mask/v
 
 在仓库根目录运行，使用已有 `pro6000` 环境。完整模型的整 CT 推理建议在分配到 GPU 的节点执行。
 
-已执行的随机单例示例见 [try.ipynb](try.ipynb)：当前用种子 422 从 testing split 抽取 `LIDC-IDRI-0516__scan522`，评估 V3 第 18 轮 checkpoint，并保存四类对照图与数值。Notebook 使用 `py311` kernel 展示结果，推理由 `pro6000` 环境执行；已有 `try_results/` 缓存时可直接在 CPU 上重新运行展示部分。之前 seed 42 的结果保留在独立目录中。
+The example [try.ipynb](try.ipynb) now uses the retained V4 epoch-18 checkpoint. V1–V3 run outputs and the old V3 notebook caches were deleted; run the notebook to generate a new V4 result.
 
 Cell 6 使用 `runner.ensure_case_result`：缺少缓存时检查推理环境是否能使用 CUDA；CPU 节点会自动提交 `rudin` 分区的单卡 A6000 Slurm 作业，显示状态并等待结果。本机已有 CUDA GPU 时直接运行。可在该单元格修改 `partition/account/gres`。更换 seed 后无需手动申请 notebook GPU kernel；中断等待后再次运行会继续等待已有作业，避免重复提交。失败时异常包含实际推理日志。2026-09-24 已用 seed 422 验证 CPU → Slurm GPU → 缓存的完整流程，作业 `12693960` 正常完成。
 
@@ -35,7 +35,7 @@ from back_prop.evaluate.eval_package import (
 )
 
 evaluator = JointModelEvaluator.from_checkpoint(
-    "/usr/project/rudinlab/datasets/LIDC_IDRI/joint_model/model_v3_runs/12616464/epoch_018.pt",
+    "/usr/project/rudinlab/datasets/LIDC_IDRI/joint_model/model_v4_runs/12748637/epoch_018.pt",
     manifest="vista3D/data/folds/fold_0.json",
     device="cuda",
 )
@@ -85,7 +85,7 @@ result = evaluate_case(model, case, annotations=evaluator.annotations)
 ```bash
 cd /home/users/yj255/code/imaging_feature
 /home/users/yj255/.local/miniforge3/envs/pro6000/bin/python -m back_prop.evaluate.eval_package \
-  --checkpoint /usr/project/rudinlab/datasets/LIDC_IDRI/joint_model/model_v3_runs/12616464/epoch_018.pt \
+  --checkpoint /usr/project/rudinlab/datasets/LIDC_IDRI/joint_model/model_v4_runs/12748637/epoch_018.pt \
   --manifest vista3D/data/folds/fold_0.json \
   --case-id LIDC-IDRI-0005__scan16 \
   --output back_prop/evaluate/eval_package/results \

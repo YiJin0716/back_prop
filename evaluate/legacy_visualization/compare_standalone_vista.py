@@ -10,6 +10,7 @@ from scipy import ndimage
 
 from back_prop.evaluate.legacy_visualization.visualize_test_ct import ROOT, DEFAULT_OUTPUT, digest, load_result, mesh, overlap_metrics
 from back_prop.common.source_compat import source_matches
+from back_prop.baseline_compare.cohort import configuration_path
 
 VISTA_CHECKPOINT = Path('/usr/project/rudinlab/datasets/LIDC_IDRI/vista3D_workspace/results/fold_0/checkpoints/best_metric_model.pt')
 FOLD = ROOT / 'vista3D/data/folds/fold_0.json'
@@ -21,7 +22,7 @@ TRAIN_CONFIG = ROOT / 'vista3D/results/fold_0/configs.yaml'
 
 def audit_split(case_key):
     cohort = json.loads(V3_COHORT.read_text())
-    config_path = Path(cohort['v3_config'])
+    config_path = configuration_path(cohort['v3_config'])
     config = json.loads(config_path.read_text())
     assert digest(config_path) == cohort['v3_config_sha256']
     assert Path(config['manifest']).resolve() == FOLD.resolve()

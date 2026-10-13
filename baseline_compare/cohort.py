@@ -15,16 +15,24 @@ HERE = Path(__file__).resolve().parent
 V3_CONFIG = Path('/usr/project/rudinlab/datasets/LIDC_IDRI/joint_model/model_v3_runs/12616464/config.json')
 
 
+def configuration_path(path):
+    """Keep frozen cohort identities valid after retiring the V3 run outputs."""
+    path = Path(path)
+    if path == V3_CONFIG and not path.exists():
+        return HERE / 'cohort_config.json'
+    return path
+
+
 def sha256(path):
     digest = hashlib.sha256()
-    with Path(path).open('rb') as stream:
+    with configuration_path(path).open('rb') as stream:
         for block in iter(lambda: stream.read(1024 * 1024), b''):
             digest.update(block)
     return digest.hexdigest()
 
 
 def build(config_path=V3_CONFIG):
-    config = json.loads(Path(config_path).read_text())
+    config = json.loads(configuration_path(config_path).read_text())
     assert config['max_cases'] is None
     assert config['malignancy_policy']['exclude_indeterminate']
     result = {'schema': 1, 'v3_config': str(config_path),

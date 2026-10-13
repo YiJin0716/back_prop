@@ -12,6 +12,11 @@ scheduled separately; training completion does not establish test performance.
 the actual configuration of V3 job **12616464** and the same V3 data loader.
 It includes source SHA256 hashes and physical-nodule/reader identities.
 
+V1–V3 training outputs have been retired. `cohort_config.json` preserves the
+small original configuration needed to verify the frozen cohort; its hash is
+unchanged. Baseline weights and shared input caches are retained. Historical
+V3 checkpoint inference cannot be rerun without restoring those deleted weights.
+
 | Split | CT scans | Patients | Retained physical nodules | Valid scan-risk labels |
 |---|---:|---:|---:|---:|
 | Training | 638 | 630 | 1,599 | 513 (mask-verified) |

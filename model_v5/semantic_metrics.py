@@ -1,4 +1,5 @@
-"""Fixed-model semantic accuracy and spread checks, separate from online logs."""
+"""Fixed-model semantic readiness and subsequent regression are distinct checks."""
+import math
 import torch
 from back_prop.common.features import SEMANTIC_NAMES
 
@@ -10,29 +11,43 @@ def semantic_metrics(probability, histogram):
     xc, yc = x-x.mean(0), y-y.mean(0)
     ps, ts = x.std(0, unbiased=False), y.std(0, unbiased=False)
     correlation = (xc*yc).mean(0)/(ps*ts).clamp_min(1e-8)
+    nll_by_attribute = -(h*p.clamp_min(1e-7).log()).sum(-1).mean(0)
     return dict(samples=len(x), predicted_std=ps.tolist(), target_std=ts.tolist(),
         std_ratio=(ps/ts.clamp_min(1e-8)).tolist(), correlation=correlation.tolist(),
         mae=(x-y).abs().mean(0).tolist(),
-        nll=float(-(h*p.clamp_min(1e-7).log()).sum(-1).mean()),
+        nll=float(nll_by_attribute.mean()), nll_by_attribute=nll_by_attribute.tolist(),
         prior_nll=float(-(h*h.mean(0).clamp_min(1e-7).log()).sum(-1).mean()))
 
 
 def semantic_failures(metrics, *, min_ratio=.15, min_correlation=.25,
                       nll_margin=.01, reference=None):
     failures=[]
+    if reference is not None and set(metrics) != set(reference):
+        return ['Semantic probe domains differ from the warmup reference']
     for domain,m in metrics.items():
         if m['samples'] < 32:
             failures.append(f'{domain}: fewer than 32 supervised probe nodules')
             continue
         variable=[i for i,t in enumerate(m['target_std']) if t>.25]
-        if m['nll'] > m['prior_nll']-nll_margin:
+        values = [m['nll'], m['prior_nll']]
+        for key in ('predicted_std','target_std','std_ratio','correlation','mae','nll_by_attribute'):
+            values.extend(m.get(key, []))
+        if not all(math.isfinite(v) for v in values):
+            failures.append(f'{domain}: nonfinite semantic metrics')
+            continue
+        margin = nll_margin if reference is None else 0.
+        if m['nll'] > m['prior_nll']-margin:
             failures.append(f'{domain}: NLL does not improve on the constant distribution')
-        if variable and sum(m['correlation'][i] for i in variable)/len(variable)<min_correlation:
+        if reference is None and variable and sum(m['correlation'][i] for i in variable)/len(variable)<min_correlation:
             failures.append(f'{domain}: mean rating correlation is too low')
         for i in variable:
-            if m['std_ratio'][i] < min_ratio:
+            # The admission threshold is not a regression threshold: a model
+            # accepted just above it must not stop for a small crossing later.
+            if reference is None and m['std_ratio'][i] < min_ratio:
                 failures.append(f'{domain}/{SEMANTIC_NAMES[i]}: output spread too small')
-        if reference:
+            if reference is not None and m['predicted_std'][i] < .01:
+                failures.append(f'{domain}/{SEMANTIC_NAMES[i]}: near-constant predictions')
+        if reference is not None:
             baseline=reference[domain]
             if m['nll']>baseline['nll']+.1:
                 failures.append(f'{domain}: NLL worsened by more than 0.1 since warmup')
@@ -41,4 +56,7 @@ def semantic_failures(metrics, *, min_ratio=.15, min_correlation=.25,
                     failures.append(f'{domain}/{SEMANTIC_NAMES[i]}: lost over half of warmup spread')
                 if m['correlation'][i]<baseline['correlation'][i]-.2:
                     failures.append(f'{domain}/{SEMANTIC_NAMES[i]}: correlation fell by over 0.2')
+                if ('nll_by_attribute' in m and 'nll_by_attribute' in baseline
+                        and m['nll_by_attribute'][i] > baseline['nll_by_attribute'][i]+.1):
+                    failures.append(f'{domain}/{SEMANTIC_NAMES[i]}: NLL worsened by more than 0.1')
     return failures

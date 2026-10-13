@@ -1,7 +1,7 @@
 """Freeze all folds before training; no test-driven configuration selection."""
 import json
 from pathlib import Path
-from ..cohort import HERE, V3_CONFIG, build, sha256
+from ..cohort import HERE, V3_CONFIG, build, sha256, configuration_path
 from back_prop.common.base_data import WholeCTLIDCDataset, load_cases
 
 ROOT = HERE.parents[1]
@@ -20,7 +20,7 @@ def write(path, value):
 
 
 def main():
-    original = json.loads(V3_CONFIG.read_text())
+    original = json.loads(configuration_path(V3_CONFIG).read_text())
     folds, union, patient_test_fold = [], {}, {}
     for fold in range(5):
         manifest = ROOT / f'vista3D/data/folds/fold_{fold}.json'

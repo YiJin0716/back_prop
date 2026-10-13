@@ -5,6 +5,7 @@ back_prop.model_v5.tests.ddp_output. Uses the actual V5 forward and criterion
 with small encoders; compares reduced gradients to independent serial forwards.
 """
 import copy
+import argparse
 from datetime import timedelta
 import json
 
@@ -17,14 +18,23 @@ from back_prop.model_v5.tests.test_v5 import tiny
 
 
 def main():
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--detector-kind',choices=('legacy','mask_guided','native_seeded'),default='legacy')
+    args=parser.parse_args()
     torch.set_num_threads(1)
     dist.init_process_group('gloo', timeout=timedelta(seconds=60))
     rank, world = dist.get_rank(), dist.get_world_size()
-    bare, batch = tiny()
+    bare, batch = tiny(detector_kind=args.detector_kind)
+    if args.detector_kind=='native_seeded':
+        with torch.no_grad():bare.segmenter.scale.fill_(20.)
     bare.use_checkpoint = True
     bare.semantics.use_checkpoint = True
     reference = copy.deepcopy(bare)
     batch['image'] = batch['image'] + .01 * rank
+    if args.detector_kind=='native_seeded' and rank==world-1:
+        # This rank has no native proposals, exercising the unseeded fallback
+        # and heads that are unused on only a subset of ranks.
+        batch['image'].zero_()
     drop_semantics = False
 
     def gate(_module, _inputs, output):
@@ -39,7 +49,7 @@ def main():
     reference.register_forward_hook(gate)
     model = DistributedDataParallel(bare, find_unused_parameters=True,
                                    broadcast_buffers=False)
-    criterion = WholeCTCriterionV5()
+    criterion = WholeCTCriterionV5(object_background_weight=.1)
     optimizer = torch.optim.SGD(bare.parameters(), lr=1e-4)
     serial_optimizer = torch.optim.SGD(reference.parameters(), lr=1e-4)
     modes = ['all_valid', 'one_rank_invalid', 'all_invalid',
@@ -74,9 +84,9 @@ def main():
         # Independent oracle: pool raw numerators with explicit global counts.
         expected_loss = criterion(expected_output, batch, synchronize=False,
             anchor=(expected_output.anchor_probabilities,anchor_hist) if anchor_roi is not None else None)
-        counts = torch.tensor([expected_loss.counts[k] for k in criterion.loss_weights],dtype=torch.float64)
+        counts = torch.tensor([expected_loss.normalizers[k] for k in criterion.loss_weights],dtype=torch.float64)
         dist.all_reduce(counts)
-        reference_objective = sum(expected_loss.numerators[k] * weight / counts[i].clamp_min(1)
+        reference_objective = sum(expected_loss.numerators[k] * weight / counts[i].clamp_min(1e-12)
                                   for i,(k,weight) in enumerate(criterion.loss_weights.items()))
         reference_objective.backward()
         parameters = list(reference.named_parameters())
@@ -104,6 +114,7 @@ def main():
             torch.testing.assert_close(actual, expected, rtol=1e-5, atol=1e-7)
         if rank == 0:
             print(json.dumps(dict(event='ddp_output_verified', mode=mode,
+                                  detector_kind=args.detector_kind,
                                   world_size=world, gradients_match_serial=True)), flush=True)
     dist.destroy_process_group()
 
