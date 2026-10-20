@@ -416,7 +416,7 @@ def validate_parallel_resume(args,saved,world):
     if saved['manifest_sha256']!=hashlib.sha256(args.manifest.read_bytes()).hexdigest():
         raise ValueError('Preparation manifest changed')
     mutable={'output_dir','prepare_resume','wandb_name','geometry_max_epochs','refiner_max_epochs','warmup_epochs',
-             'detr_feature_cache'}
+             'detr_feature_cache','mask_temperature_start','mask_temperature_end','mask_temperature_epochs'}
     legacy_defaults={'detector_kind':'legacy','detector_nms_iou':'0.5','object_background_weight':'1.0',
                      'native_proposal_threshold':'0.1','native_confidence_residual_bound':'None'}
     for k,v in vars(args).items():

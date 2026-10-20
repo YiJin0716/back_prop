@@ -1,0 +1,937 @@
+{
+  "schema": 1,
+  "output": "/home/users/yj255/code/imaging_feature/back_prop/evaluate/v5_joint_analysis/results_12877415_epoch18",
+  "run": "/usr/project/rudinlab/datasets/LIDC_IDRI/joint_model/baseline_compare/v5_12877415_20261015",
+  "cohort": "/home/users/yj255/code/imaging_feature/back_prop/baseline_compare/cohort.json",
+  "cohort_sha256": "b8e93f42139719fb762c5de14933d6ea8feb91430f741ed2d9900f2df3fcd22f",
+  "cache": "/usr/project/rudinlab/datasets/LIDC_IDRI/joint_model/baseline_compare/cache_v1",
+  "training_scans": 638,
+  "valid_training_scan_labels": 513,
+  "training_keys_sha256": "d776378c040f94f6bff9ae6b19bc6f9c53c68efbcf27a173dacc7c392413a1f9",
+  "test": [
+    {
+      "case_id": "LIDC-IDRI-0005__scan16",
+      "patient_id": "LIDC-IDRI-0005",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0005__scan16.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0009__scan20",
+      "patient_id": "LIDC-IDRI-0009",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0009__scan20.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0010__scan21",
+      "patient_id": "LIDC-IDRI-0010",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0010__scan21.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0015__scan26",
+      "patient_id": "LIDC-IDRI-0015",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0015__scan26.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0037__scan48",
+      "patient_id": "LIDC-IDRI-0037",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0037__scan48.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0039__scan50",
+      "patient_id": "LIDC-IDRI-0039",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0039__scan50.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0043__scan54",
+      "patient_id": "LIDC-IDRI-0043",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0043__scan54.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0049__scan60",
+      "patient_id": "LIDC-IDRI-0049",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0049__scan60.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0056__scan67",
+      "patient_id": "LIDC-IDRI-0056",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0056__scan67.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0063__scan74",
+      "patient_id": "LIDC-IDRI-0063",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0063__scan74.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0065__scan76",
+      "patient_id": "LIDC-IDRI-0065",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0065__scan76.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0067__scan78",
+      "patient_id": "LIDC-IDRI-0067",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0067__scan78.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0072__scan82",
+      "patient_id": "LIDC-IDRI-0072",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0072__scan82.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0078__scan1",
+      "patient_id": "LIDC-IDRI-0078",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0078__scan1.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0083__scan91",
+      "patient_id": "LIDC-IDRI-0083",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0083__scan91.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0086__scan94",
+      "patient_id": "LIDC-IDRI-0086",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0086__scan94.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0090__scan98",
+      "patient_id": "LIDC-IDRI-0090",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0090__scan98.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0091__scan99",
+      "patient_id": "LIDC-IDRI-0091",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0091__scan99.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0092__scan100",
+      "patient_id": "LIDC-IDRI-0092",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0092__scan100.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0096__scan104",
+      "patient_id": "LIDC-IDRI-0096",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0096__scan104.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0104__scan111",
+      "patient_id": "LIDC-IDRI-0104",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0104__scan111.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0105__scan112",
+      "patient_id": "LIDC-IDRI-0105",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0105__scan112.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0118__scan123",
+      "patient_id": "LIDC-IDRI-0118",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0118__scan123.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0121__scan126",
+      "patient_id": "LIDC-IDRI-0121",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0121__scan126.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0128__scan132",
+      "patient_id": "LIDC-IDRI-0128",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0128__scan132.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0130__scan134",
+      "patient_id": "LIDC-IDRI-0130",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0130__scan134.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0133__scan137",
+      "patient_id": "LIDC-IDRI-0133",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0133__scan137.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0135__scan139",
+      "patient_id": "LIDC-IDRI-0135",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0135__scan139.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0142__scan145",
+      "patient_id": "LIDC-IDRI-0142",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0142__scan145.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0147__scan150",
+      "patient_id": "LIDC-IDRI-0147",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0147__scan150.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0149__scan152",
+      "patient_id": "LIDC-IDRI-0149",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0149__scan152.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0154__scan11",
+      "patient_id": "LIDC-IDRI-0154",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0154__scan11.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0155__scan156",
+      "patient_id": "LIDC-IDRI-0155",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0155__scan156.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0156__scan157",
+      "patient_id": "LIDC-IDRI-0156",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0156__scan157.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0163__scan164",
+      "patient_id": "LIDC-IDRI-0163",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0163__scan164.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0171__scan172",
+      "patient_id": "LIDC-IDRI-0171",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0171__scan172.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0173__scan174",
+      "patient_id": "LIDC-IDRI-0173",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0173__scan174.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0175__scan176",
+      "patient_id": "LIDC-IDRI-0175",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0175__scan176.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0178__scan179",
+      "patient_id": "LIDC-IDRI-0178",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0178__scan179.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0179__scan180",
+      "patient_id": "LIDC-IDRI-0179",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0179__scan180.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0180__scan181",
+      "patient_id": "LIDC-IDRI-0180",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0180__scan181.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0186__scan187",
+      "patient_id": "LIDC-IDRI-0186",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0186__scan187.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0190__scan191",
+      "patient_id": "LIDC-IDRI-0190",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0190__scan191.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0193__scan194",
+      "patient_id": "LIDC-IDRI-0193",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0193__scan194.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0210__scan211",
+      "patient_id": "LIDC-IDRI-0210",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0210__scan211.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0215__scan216",
+      "patient_id": "LIDC-IDRI-0215",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0215__scan216.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0217__scan218",
+      "patient_id": "LIDC-IDRI-0217",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0217__scan218.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0222__scan223",
+      "patient_id": "LIDC-IDRI-0222",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0222__scan223.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0223__scan224",
+      "patient_id": "LIDC-IDRI-0223",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0223__scan224.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0227__scan228",
+      "patient_id": "LIDC-IDRI-0227",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0227__scan228.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0242__scan242",
+      "patient_id": "LIDC-IDRI-0242",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0242__scan242.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0243__scan243",
+      "patient_id": "LIDC-IDRI-0243",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0243__scan243.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0259__scan259",
+      "patient_id": "LIDC-IDRI-0259",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0259__scan259.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0268__scan268",
+      "patient_id": "LIDC-IDRI-0268",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0268__scan268.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0280__scan280",
+      "patient_id": "LIDC-IDRI-0280",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0280__scan280.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0283__scan283",
+      "patient_id": "LIDC-IDRI-0283",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0283__scan283.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0284__scan284",
+      "patient_id": "LIDC-IDRI-0284",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0284__scan284.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0291__scan291",
+      "patient_id": "LIDC-IDRI-0291",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0291__scan291.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0296__scan296",
+      "patient_id": "LIDC-IDRI-0296",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0296__scan296.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0298__scan298",
+      "patient_id": "LIDC-IDRI-0298",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0298__scan298.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0301__scan301",
+      "patient_id": "LIDC-IDRI-0301",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0301__scan301.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0302__scan302",
+      "patient_id": "LIDC-IDRI-0302",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0302__scan302.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0314__scan314",
+      "patient_id": "LIDC-IDRI-0314",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0314__scan314.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0323__scan324",
+      "patient_id": "LIDC-IDRI-0323",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0323__scan324.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0326__scan327",
+      "patient_id": "LIDC-IDRI-0326",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0326__scan327.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0329__scan329",
+      "patient_id": "LIDC-IDRI-0329",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0329__scan329.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0339__scan341",
+      "patient_id": "LIDC-IDRI-0339",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0339__scan341.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0340__scan342",
+      "patient_id": "LIDC-IDRI-0340",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0340__scan342.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0343__scan345",
+      "patient_id": "LIDC-IDRI-0343",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0343__scan345.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0344__scan346",
+      "patient_id": "LIDC-IDRI-0344",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0344__scan346.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0346__scan348",
+      "patient_id": "LIDC-IDRI-0346",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0346__scan348.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0348__scan350",
+      "patient_id": "LIDC-IDRI-0348",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0348__scan350.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0350__scan352",
+      "patient_id": "LIDC-IDRI-0350",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0350__scan352.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0356__scan359",
+      "patient_id": "LIDC-IDRI-0356",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0356__scan359.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0359__scan362",
+      "patient_id": "LIDC-IDRI-0359",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0359__scan362.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0369__scan373",
+      "patient_id": "LIDC-IDRI-0369",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0369__scan373.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0373__scan377",
+      "patient_id": "LIDC-IDRI-0373",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0373__scan377.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0390__scan394",
+      "patient_id": "LIDC-IDRI-0390",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0390__scan394.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0396__scan400",
+      "patient_id": "LIDC-IDRI-0396",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0396__scan400.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0399__scan403",
+      "patient_id": "LIDC-IDRI-0399",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0399__scan403.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0404__scan408",
+      "patient_id": "LIDC-IDRI-0404",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0404__scan408.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0405__scan409",
+      "patient_id": "LIDC-IDRI-0405",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0405__scan409.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0421__scan425",
+      "patient_id": "LIDC-IDRI-0421",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0421__scan425.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0427__scan431",
+      "patient_id": "LIDC-IDRI-0427",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0427__scan431.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0430__scan434",
+      "patient_id": "LIDC-IDRI-0430",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0430__scan434.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0439__scan443",
+      "patient_id": "LIDC-IDRI-0439",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0439__scan443.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0440__scan444",
+      "patient_id": "LIDC-IDRI-0440",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0440__scan444.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0443__scan448",
+      "patient_id": "LIDC-IDRI-0443",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0443__scan448.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0444__scan449",
+      "patient_id": "LIDC-IDRI-0444",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0444__scan449.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0447__scan452",
+      "patient_id": "LIDC-IDRI-0447",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0447__scan452.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0463__scan468",
+      "patient_id": "LIDC-IDRI-0463",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0463__scan468.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0464__scan469",
+      "patient_id": "LIDC-IDRI-0464",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0464__scan469.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0476__scan481",
+      "patient_id": "LIDC-IDRI-0476",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0476__scan481.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0483__scan488",
+      "patient_id": "LIDC-IDRI-0483",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0483__scan488.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0488__scan494",
+      "patient_id": "LIDC-IDRI-0488",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0488__scan494.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0501__scan507",
+      "patient_id": "LIDC-IDRI-0501",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0501__scan507.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0504__scan510",
+      "patient_id": "LIDC-IDRI-0504",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0504__scan510.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0505__scan511",
+      "patient_id": "LIDC-IDRI-0505",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0505__scan511.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0516__scan522",
+      "patient_id": "LIDC-IDRI-0516",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0516__scan522.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0521__scan527",
+      "patient_id": "LIDC-IDRI-0521",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0521__scan527.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0532__scan538",
+      "patient_id": "LIDC-IDRI-0532",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0532__scan538.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0533__scan539",
+      "patient_id": "LIDC-IDRI-0533",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0533__scan539.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0539__scan545",
+      "patient_id": "LIDC-IDRI-0539",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0539__scan545.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0541__scan547",
+      "patient_id": "LIDC-IDRI-0541",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0541__scan547.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0546__scan552",
+      "patient_id": "LIDC-IDRI-0546",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0546__scan552.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0552__scan558",
+      "patient_id": "LIDC-IDRI-0552",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0552__scan558.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0562__scan568",
+      "patient_id": "LIDC-IDRI-0562",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0562__scan568.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0571__scan577",
+      "patient_id": "LIDC-IDRI-0571",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0571__scan577.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0583__scan589",
+      "patient_id": "LIDC-IDRI-0583",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0583__scan589.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0584__scan590",
+      "patient_id": "LIDC-IDRI-0584",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0584__scan590.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0587__scan592",
+      "patient_id": "LIDC-IDRI-0587",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0587__scan592.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0588__scan593",
+      "patient_id": "LIDC-IDRI-0588",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0588__scan593.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0595__scan600",
+      "patient_id": "LIDC-IDRI-0595",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0595__scan600.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0606__scan611",
+      "patient_id": "LIDC-IDRI-0606",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0606__scan611.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0609__scan614",
+      "patient_id": "LIDC-IDRI-0609",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0609__scan614.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0624__scan629",
+      "patient_id": "LIDC-IDRI-0624",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0624__scan629.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0630__scan635",
+      "patient_id": "LIDC-IDRI-0630",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0630__scan635.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0644__scan1011",
+      "patient_id": "LIDC-IDRI-0644",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0644__scan1011.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0649__scan1006",
+      "patient_id": "LIDC-IDRI-0649",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0649__scan1006.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0663__scan992",
+      "patient_id": "LIDC-IDRI-0663",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0663__scan992.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0666__scan989",
+      "patient_id": "LIDC-IDRI-0666",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0666__scan989.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0670__scan985",
+      "patient_id": "LIDC-IDRI-0670",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0670__scan985.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0674__scan981",
+      "patient_id": "LIDC-IDRI-0674",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0674__scan981.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0676__scan979",
+      "patient_id": "LIDC-IDRI-0676",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0676__scan979.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0686__scan969",
+      "patient_id": "LIDC-IDRI-0686",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0686__scan969.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0688__scan967",
+      "patient_id": "LIDC-IDRI-0688",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0688__scan967.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0693__scan962",
+      "patient_id": "LIDC-IDRI-0693",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0693__scan962.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0708__scan947",
+      "patient_id": "LIDC-IDRI-0708",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0708__scan947.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0709__scan946",
+      "patient_id": "LIDC-IDRI-0709",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0709__scan946.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0719__scan936",
+      "patient_id": "LIDC-IDRI-0719",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0719__scan936.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0720__scan935",
+      "patient_id": "LIDC-IDRI-0720",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0720__scan935.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0721__scan934",
+      "patient_id": "LIDC-IDRI-0721",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0721__scan934.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0722__scan933",
+      "patient_id": "LIDC-IDRI-0722",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0722__scan933.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0723__scan932",
+      "patient_id": "LIDC-IDRI-0723",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0723__scan932.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0726__scan929",
+      "patient_id": "LIDC-IDRI-0726",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0726__scan929.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0732__scan923",
+      "patient_id": "LIDC-IDRI-0732",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0732__scan923.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0739__scan916",
+      "patient_id": "LIDC-IDRI-0739",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0739__scan916.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0748__scan907",
+      "patient_id": "LIDC-IDRI-0748",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0748__scan907.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0751__scan904",
+      "patient_id": "LIDC-IDRI-0751",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0751__scan904.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0754__scan901",
+      "patient_id": "LIDC-IDRI-0754",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0754__scan901.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0756__scan899",
+      "patient_id": "LIDC-IDRI-0756",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0756__scan899.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0758__scan897",
+      "patient_id": "LIDC-IDRI-0758",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0758__scan897.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0759__scan896",
+      "patient_id": "LIDC-IDRI-0759",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0759__scan896.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0766__scan889",
+      "patient_id": "LIDC-IDRI-0766",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0766__scan889.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0772__scan883",
+      "patient_id": "LIDC-IDRI-0772",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0772__scan883.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0780__scan875",
+      "patient_id": "LIDC-IDRI-0780",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0780__scan875.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0782__scan873",
+      "patient_id": "LIDC-IDRI-0782",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0782__scan873.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0786__scan869",
+      "patient_id": "LIDC-IDRI-0786",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0786__scan869.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0787__scan868",
+      "patient_id": "LIDC-IDRI-0787",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0787__scan868.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0790__scan865",
+      "patient_id": "LIDC-IDRI-0790",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0790__scan865.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0793__scan862",
+      "patient_id": "LIDC-IDRI-0793",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0793__scan862.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0797__scan858",
+      "patient_id": "LIDC-IDRI-0797",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0797__scan858.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0810__scan845",
+      "patient_id": "LIDC-IDRI-0810",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0810__scan845.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0814__scan841",
+      "patient_id": "LIDC-IDRI-0814",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0814__scan841.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0824__scan831",
+      "patient_id": "LIDC-IDRI-0824",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0824__scan831.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0827__scan828",
+      "patient_id": "LIDC-IDRI-0827",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0827__scan828.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0829__scan826",
+      "patient_id": "LIDC-IDRI-0829",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0829__scan826.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0838__scan817",
+      "patient_id": "LIDC-IDRI-0838",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0838__scan817.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0841__scan814",
+      "patient_id": "LIDC-IDRI-0841",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0841__scan814.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0849__scan806",
+      "patient_id": "LIDC-IDRI-0849",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0849__scan806.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0857__scan798",
+      "patient_id": "LIDC-IDRI-0857",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0857__scan798.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0872__scan783",
+      "patient_id": "LIDC-IDRI-0872",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0872__scan783.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0902__scan753",
+      "patient_id": "LIDC-IDRI-0902",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0902__scan753.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0908__scan747",
+      "patient_id": "LIDC-IDRI-0908",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0908__scan747.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0915__scan740",
+      "patient_id": "LIDC-IDRI-0915",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0915__scan740.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0923__scan732",
+      "patient_id": "LIDC-IDRI-0923",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0923__scan732.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0928__scan727",
+      "patient_id": "LIDC-IDRI-0928",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0928__scan727.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0935__scan720",
+      "patient_id": "LIDC-IDRI-0935",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0935__scan720.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0941__scan714",
+      "patient_id": "LIDC-IDRI-0941",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0941__scan714.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0956__scan699",
+      "patient_id": "LIDC-IDRI-0956",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0956__scan699.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0957__scan698",
+      "patient_id": "LIDC-IDRI-0957",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0957__scan698.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0961__scan694",
+      "patient_id": "LIDC-IDRI-0961",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0961__scan694.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0965__scan690",
+      "patient_id": "LIDC-IDRI-0965",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0965__scan690.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0987__scan668",
+      "patient_id": "LIDC-IDRI-0987",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0987__scan668.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-0994__scan661",
+      "patient_id": "LIDC-IDRI-0994",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-0994__scan661.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-1001__scan654",
+      "patient_id": "LIDC-IDRI-1001",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-1001__scan654.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-1004__scan651",
+      "patient_id": "LIDC-IDRI-1004",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-1004__scan651.nii.gz"
+    },
+    {
+      "case_id": "LIDC-IDRI-1010__scan645",
+      "patient_id": "LIDC-IDRI-1010",
+      "image": "/usr/project/rudinlab/datasets/LIDC_IDRI/original_LIDC/NIFTI_ver/LIDC-IDRI-1010__scan645.nii.gz"
+    }
+  ],
+  "manifest": "/home/users/yj255/code/imaging_feature/vista3D/data/folds/fold_0.json",
+  "manifest_sha256": "b14cc2afe3c5c840a5a8795ea153a5d674b510d38e345e5b532ca1f19b4466a6",
+  "v5_checkpoint": "/usr/project/rudinlab/datasets/LIDC_IDRI/joint_model/model_v5_runs/12877415/epoch_018.pt",
+  "v5_checkpoint_sha256": "e56ccac7d9ac92be571386dda2beedf2e9a607f6931f16828e456d645f04697b",
+  "v5_predictions_sha256": "c8546cd4fabfb44423de1fc057cab7af1043ceaa32680f57b4c7afde45b6eab9",
+  "initial_classifier": "/usr/project/rudinlab/datasets/LIDC_IDRI/joint_model/baseline_compare/deeplung/classifier/12622903/last.pt",
+  "initial_classifier_sha256": "89692425ef30cfb5e4d4f04c019f7676924abbba6e4b90cc0c094a313d17b712",
+  "sybil_public": "/home/users/yj255/code/imaging_feature/back_prop/baseline_compare/sybil/weights/28a7cd44f5bcd3e6cc760b65c7e0d54d.ckpt",
+  "deeplung_public": "/home/users/yj255/code/imaging_feature/back_prop/baseline_compare/deeplung/upstream/detector/dpnmodel/fd0066.ckpt",
+  "epochs": {
+    "sybil": 3,
+    "detector": 5,
+    "adapt": 105
+  },
+  "selection": "Fixed final epochs; no test or overlapping validation selection",
+  "endpoint": "LIDC reader-derived current malignancy, not pathology or future incidence",
+  "training_target": "Same V5 retained-nodule mean >3; mean=3 ignored; ambiguous scan BCE masked",
+  "test_target": "Same any-positive-reader volume labels and three rules as the existing V5 plot",
+  "pretraining_notice": "DeepLung public LUNA16 pretraining may overlap the LIDC test cohort.",
+  "public_weights_explicitly_authorized": true,
+  "public_sha256": {
+    "sybil": "40c9a46c45b8d32b23b52ed75182d7e1886746796476feb07a2767db86947251",
+    "deeplung": "1471097384a5fc45420873afbebda6e86ddcb04b923f8a2640ff66dab622bb2c"
+  },
+  "trained_artifacts_sha256": {
+    "deeplung": {
+      "checkpoint": "97ae9af9bfe7502642ea49e387053a941ef2b337797322fc161f9c1b4ddc7132",
+      "detector_checkpoint": "1c4811c108e3d91c7e1176cd657311c15ca6669b6d17267deadc8412225b60a4",
+      "gbm": "886a2582cd2c540bb1c0c811ed526d2423b0088b31c477a8b6a12cdcae91f085"
+    },
+    "sybil": {
+      "checkpoint": "aee30ed8d30177af12649e45e7b211f07e52caf756bbd1402e82cf335004177c"
+    }
+  }
+}

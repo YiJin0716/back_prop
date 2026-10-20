@@ -1,0 +1,17 @@
+{
+  "job_id": 13065371,
+  "afterok": [],
+  "command": [
+    "sbatch",
+    "--parsable",
+    "--job-name=v5-hard-html",
+    "--partition=rudin,compsci-gpu",
+    "--account=rudin",
+    "--gres=gpu:a6000:1",
+    "--array=0-3%4",
+    "--output=/home/users/yj255/code/imaging_feature/back_prop/evaluate/every_CT/V5_12955332/_job/%A_%a.out",
+    "--error=/home/users/yj255/code/imaging_feature/back_prop/evaluate/every_CT/V5_12955332/_job/%A_%a.err",
+    "/home/users/yj255/code/imaging_feature/back_prop/evaluate/every_CT/run.sbatch",
+    "/home/users/yj255/code/imaging_feature/back_prop/evaluate/every_CT/V5_12955332/_job/plan.json"
+  ]
+}

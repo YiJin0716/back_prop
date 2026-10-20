@@ -1,0 +1,99 @@
+% Converted from the supplied Word document; compile with XeLaTeX.
+% Run from this directory: xelatex v5_evaluation_report.tex
+\documentclass[11pt,a4paper,onecolumn]{article}
+\usepackage[top=22mm,bottom=22mm,left=23mm,right=23mm,footskip=11mm]{geometry}
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Termes}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{needspace}
+\usepackage{titlesec}
+\usepackage[hidelinks,unicode]{hyperref}
+\hypersetup{pdftitle={V5 Model: Framework and Evaluation},pdfauthor={}}
+\graphicspath{{v5_evaluation_report_figures/}}
+\captionsetup{font=small,labelfont=bf,labelsep=period,justification=justified,singlelinecheck=false,hypcap=false,skip=7pt}
+\titleformat{\section}{\large\bfseries}{\thesection}{0.7em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{0.7em}{}
+\titlespacing*{\section}{0pt}{13pt}{6pt}
+\titlespacing*{\subsection}{0pt}{10pt}{5pt}
+\setlength{\parindent}{1.2em}
+\setlength{\parskip}{3pt}
+\linespread{1.06}
+\setlength{\textfloatsep}{12pt plus 2pt minus 2pt}
+\setlength{\intextsep}{10pt plus 2pt minus 2pt}
+\setlength{\emergencystretch}{1.5em}
+\clubpenalty=10000
+\widowpenalty=10000
+\raggedbottom
+\pagestyle{plain}
+
+% Fixed figure blocks keep each caption with its original image.
+\newcommand{\reportfigure}[4]{%
+  \begin{center}
+  \begin{minipage}{\textwidth}
+  \centering
+  \includegraphics[width=\linewidth,height=#2\textheight,keepaspectratio]{#1}
+  \captionof{figure}{#3}\label{#4}
+  \end{minipage}
+  \end{center}
+}
+
+\begin{document}
+\section{Research Gaps and Our Contributions}
+Existing interpretable multitask models often cannot identify nodules on their own, meaning that they require nodule locations or masks as input. Moreover, they typically connect several separately trained models, with little supervision or interaction between components. In contrast, models that process an entire CT scan often do not produce voxel-level masks or semantic features. The use of hard masks can also block gradients from the downstream diagnostic task from reaching the segmentation model. Yet these masks and features are nearly as important as the final predicted risk because nodule assessment is inherently subjective: different clinicians may assign different boundaries, semantic attributes, and malignancy ratings to the same nodule. Therefore, a single, opaque risk score is not sufficient to support clinical judgment on its own, as it does not reveal which nodule masks or imaging findings drove the prediction.
+
+To address both limitations, we propose a complete framework for analyzing whole CT scans. Our model first passes the entire CT scan through a segmentation model to generate a mask of all nodules in the scan. A multichannel deep learning model then separates this whole-scan mask into masks for individual nodules. Next, the model extracts radiomic and semantic features from each nodule and uses them to predict malignancy. Gradients can flow through nearly the entire framework, allowing downstream tasks to guide upstream components during training. This shared training process may enable our model to perform better than interpretable multitask models that simply connect separately trained components. Compared with fully black-box deep learning models, our framework also provides greater interpretability by producing a mask and a set of features for each nodule, both of which can provide important evidence for clinical diagnosis.
+
+\section{Model Structure}
+\reportfigure{model_structure.png}{0.15}
+  {Architecture of the proposed whole-CT analysis framework.}
+  {fig:structure}
+
+\clearpage
+\section{Evaluation}
+\subsection{Per-Volume Evaluation}
+\reportfigure{volume_malignancy_roc.png}{0.80}
+  {End-to-end patient risk: volume-level malignancy ROC curves for V5 and the fine-tuned DeepLung and Sybil baselines.}
+  {fig:volume-risk}
+
+\clearpage
+\vspace*{\fill}
+\reportfigure{nodule_detection_froc.png}{0.84}
+  {FROC of nodule detection. The curve relates nodule sensitivity to the mean number of false positives per CT.}
+  {fig:froc}
+\vspace*{\fill}
+
+\clearpage
+\subsection{Per-Annotation Evaluation}
+\reportfigure{annotation_malignancy_roc.png}{0.83}
+  {Malignancy prediction using official LIDC features as input to the trained malignancy model.}
+  {fig:annotation-risk}
+
+\clearpage
+\reportfigure{annotation_semantic_auc.png}{0.32}
+  {Semantic feature prediction using official masks. Heatmap cells report ROC AUC for the indicated official-rating threshold.}
+  {fig:annotation-semantic}
+
+\subsection{Per-Nodule Evaluation}
+\reportfigure{nodule_semantic_auc.png}{0.51}
+  {Semantic feature prediction from predicted nodule masks, evaluated against the closest annotation and the mean reader rating.}
+  {fig:nodule-semantic}
+
+\clearpage
+\reportfigure{detected_nodule_malignancy_roc.png}{0.87}
+  {Nodule-level malignancy prediction for detected nodules only.}
+  {fig:detected-risk}
+
+\clearpage
+\reportfigure{all_nodule_malignancy_roc.png}{0.87}
+  {Nodule-level malignancy prediction including missed nodules. As indicated in the figure, missed nodules are assigned a risk score of zero for evaluation.}
+  {fig:all-risk}
+
+\clearpage
+\vspace*{\fill}
+\reportfigure{segmentation_overlap.png}{0.84}
+  {Segmentation Dice and IoU. Among 540 nodules in total, 358 were detected. The boxplots show matched nodules; the table also reports all-ground-truth (All-GT) results.}
+  {fig:overlap}
+\vspace*{\fill}
+\end{document}

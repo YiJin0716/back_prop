@@ -121,6 +121,16 @@ and malignancy supervision requires both at least 80% GT crop coverage and
 soft Dice of at least 0.3. Fine segmentation still learns from poor predictions.
 Risk and nodule weights are active from the first joint epoch.
 
+Joint mask annealing is optional. Add `--mask-temperature-start 1.0
+--mask-temperature-end 0.1 --mask-temperature-epochs 18` to `train.sbatch` to
+decrease temperature by a cosine schedule from epoch 1 through epoch 18.
+The final probability is `sigmoid(fine_mask_logits / temperature)`, shared by
+the semantic inputs, radiomics, and evaluation exports. Segmentation losses
+and the mask-quality supervision gate still use raw logits. Official-mask
+warmup and semantic anchors are unchanged. The default remains constant 1.0.
+Temperature is saved with the model, restored at inference, and logged to
+`00_training/mask_temperature`; joint resume inherits and validates the schedule.
+
 Joint teacher probabilities are 1.0, 0.9, …, 0.1 for epochs 1–10, then zero.
 At zero, candidate selection and crop positions come only from predictions;
 there is no coverage-triggered GT fallback. Ground truth remains available for

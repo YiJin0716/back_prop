@@ -185,6 +185,27 @@ class OfficialIOTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "overlap"):
             load_test_cases(manifest)
 
+    def test_v5_export_uses_annealed_mask_without_changing_binary_segmentation(self):
+        import torch
+        from back_prop.model_v5.tests.test_v5 import tiny
+        torch.set_num_threads(2)
+        model, _ = tiny()
+        model.eval()
+        soft = evaluate_case(model, self.case, annotations=self.annotations(), object_threshold=0)
+        model.set_temperature(.1)
+        sharp = evaluate_case(model, self.case, annotations=self.annotations(), object_threshold=0)
+        self.assertEqual(len(soft.predictions), 4)
+        self.assertAlmostEqual(sharp.metadata['diagnostic_mask_temperature'], .1)
+        self.assertIn('/ mask_temperature', sharp.metadata['segmentation_probability'])
+        self.assertTrue(sharp.metadata['bank_unchanged'])
+        uncertainty = [0., 0.]
+        for before, after in zip(soft.predictions, sharp.predictions):
+            np.testing.assert_array_equal(before.mask.values, after.mask.values)
+            for i, prediction in enumerate((before, after)):
+                p = prediction.probability.values
+                uncertainty[i] += float((p * (1-p)).sum())
+        self.assertLess(uncertainty[1], uncertainty[0])
+
     def test_real_v3_v4_variants_forward_without_gt_and_without_bank_updates(self):
         import importlib.util
         import torch

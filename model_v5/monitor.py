@@ -17,6 +17,7 @@ class Monitor(BaseMonitor):
 
 def epoch_metrics(record, weights):
     result = dict(epoch=record['epoch'], global_step=record['global_step'])
+    result['00_training/mask_temperature'] = record['temperature']
     result.update({f'01_components/{k}': record[k] for k in TERM_NAMES})
     result.update({f'00_training/{k}': record[k] for k in
                    ('total', 'active_total', 'teacher_probability', 'supervised_nodules',

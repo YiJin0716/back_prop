@@ -1,4 +1,5 @@
 """Reproduce the descriptive V4 semantic and epoch-log audit on CPU."""
+import argparse
 import hashlib
 import json
 from pathlib import Path
@@ -30,8 +31,14 @@ def stats(array):
                 min=array.min(0).tolist(), max=array.max(0).tolist())
 
 
-def main():
-    prediction_path = REPO/'back_prop/evaluate/per_annotation/results/predictions.csv'
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--predictions', type=Path, required=True,
+                        help='CSV of V4 reader-annotation predictions to audit')
+    args = parser.parse_args(argv)
+    prediction_path = args.predictions.resolve()
+    if not prediction_path.is_file():
+        parser.error(f'Prediction CSV does not exist: {prediction_path}')
     data = pd.read_csv(prediction_path)
     audit = dict(names=NAMES, test_prediction_file=str(prediction_path),
                  test_prediction_sha256=hashlib.sha256(prediction_path.read_bytes()).hexdigest(),

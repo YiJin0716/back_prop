@@ -6,16 +6,19 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 import random
 import sys
 import time
+import traceback
 
 import numpy as np
 import torch
 from torch import Tensor, nn
 import torch.distributed as dist
+from torch.distributed.elastic.multiprocessing.errors import record
 from torch.nn.parallel import DistributedDataParallel
 from torch.utils.data import DataLoader, DistributedSampler
 
@@ -23,7 +26,7 @@ from back_prop.lidc_policy import POLICY_NAME
 from back_prop.common.semantic_data import DEFAULT_MANIFEST, WholeCTLIDCDataset, load_cases, whole_ct_collate
 from .loss import WholeCTCriterionV5, LossAccumulator, LOSS_SCHEMA
 from .model import ARCHITECTURE, WholeCTJointModelV5
-from back_prop.common.schedule import LearningRateSchedule, make_lr_scheduler, assert_learning_rates
+from back_prop.common.schedule import TemperatureSchedule, LearningRateSchedule, make_lr_scheduler, assert_learning_rates
 from .features import NORMALIZATION, CONVOLUTION
 from .warmup import run_warmup, AnchorStream
 from .preparation import SCHEMA, geometry_audit
@@ -66,6 +69,12 @@ def parse_args(argv=None) -> argparse.Namespace:
     parser.add_argument("--baseline-l2", type=float, default=1e-3)
     parser.add_argument("--lr-min-ratio", type=float, default=0.1)
     parser.add_argument("--lr-schedule-epochs", type=int, default=18)
+    parser.add_argument('--mask-temperature-start', type=float,
+                        help='First joint epoch temperature; defaults to 1, or the resumed schedule')
+    parser.add_argument('--mask-temperature-end', type=float,
+                        help='Final temperature; defaults to the start value (constant)')
+    parser.add_argument('--mask-temperature-epochs', type=int,
+                        help='Cosine temperature horizon, including both endpoints; default 18')
     parser.add_argument("--stop-after-epoch", type=int, help="Save then stop; only for a limited smoke cohort")
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--epochs", type=int, default=18)
@@ -167,6 +176,12 @@ def parse_args(argv=None) -> argparse.Namespace:
         args.native_confidence_residual_bound=None if bound in (None,'None') else float(bound)
     if args.native_confidence_residual_bound is not None and args.native_confidence_residual_bound<=0:
         parser.error('Native confidence residual bound must be positive')
+    temperature_config = saved_config if args.resume else {}
+    for name, fallback in (('mask_temperature_start', 1.0),
+                           ('mask_temperature_end', None), ('mask_temperature_epochs', 18)):
+        if getattr(args, name) is None:
+            default = args.mask_temperature_start if fallback is None else fallback
+            setattr(args, name, temperature_config.get(name, default))
     return args
 
 
@@ -234,6 +249,8 @@ def main() -> None:
     if args.stop_after_epoch is not None and (args.max_cases is None or args.stop_after_epoch < 1):
         raise ValueError('--stop-after-epoch requires a limited smoke cohort and positive epoch')
     lr_schedule = LearningRateSchedule(min_ratio=args.lr_min_ratio, epochs=args.lr_schedule_epochs)
+    temperature_schedule = TemperatureSchedule(start=args.mask_temperature_start,
+        end=args.mask_temperature_end, epochs=args.mask_temperature_epochs)
     base_lrs = dict(main=args.lr_main, vista=args.lr_vista, semantic=args.lr_semantic)
     rank, local_rank, world = distributed_setup()
     seed = args.seed + rank
@@ -384,7 +401,9 @@ def main() -> None:
             raise ValueError('Resume loss weights mismatch')
         mutable = {'output_dir', 'resume', 'prepare_resume', 'init_v2', 'restart_from', 'epochs', 'stop_after_epoch', 'save_every', 'wandb_name', 'detr_feature_cache'}
         legacy_defaults={'detector_kind':'legacy','detector_nms_iou':.5,'object_background_weight':1.,
-                         'native_proposal_threshold':.1,'native_confidence_residual_bound':None}
+                         'native_proposal_threshold':.1,'native_confidence_residual_bound':None,
+                         'mask_temperature_start':1.0,'mask_temperature_end':1.0,
+                         'mask_temperature_epochs':18}
         for name, value in vars(args).items():
             if name not in mutable and str(value) != str(saved['config'].get(name,legacy_defaults.get(name))):
                 raise ValueError(f'Resume argument mismatch: {name}')
@@ -395,8 +414,9 @@ def main() -> None:
         saved_lr_scheduler = saved['lr_scheduler']
         global_step = saved['global_step']
         bare_model.load_state_dict(saved["model"], strict=True)
-        if float(bare_model.mask_temperature) != 1.0:
-            raise ValueError('V5 requires fixed mask temperature 1.0')
+        if not math.isclose(float(bare_model.mask_temperature),
+                            temperature_schedule(saved['epoch']), rel_tol=1e-6):
+            raise ValueError('Saved mask temperature differs from its epoch schedule')
         optimizer.load_state_dict(saved["optimizer"])
         scaler.load_state_dict(saved["scaler"])
         start_epoch = int(saved["epoch"]) + 1
@@ -443,8 +463,10 @@ def main() -> None:
         "warmup_policy": "concurrent DETR / refiner / semantic; official annotations only; disjoint optimizers",
         "manifest_sha256": hashlib.sha256(args.manifest.read_bytes()).hexdigest(),
         "lr_schedule": lr_schedule.state_dict(),
-        "mask_temperature": 1.0,
-        "temperature_schedule": "constant",
+        "mask_temperature": args.mask_temperature_start,
+        "temperature_schedule": (temperature_schedule.state_dict()
+            if args.mask_temperature_start != args.mask_temperature_end else 'constant'),
+        "mask_temperature_scope": "final mask probabilities, semantic inputs and radiomics; raw logits for segmentation losses and supervision gate",
         "risk_stages": "radiomics L2 logistic; frozen-offset continuous FasterRisk on six semantics",
         "residual_definition": "y - sigmoid(radiomics_logit); modeled by logistic offset correction",
         "semantic_loss_baseline_detached": True,
@@ -508,6 +530,7 @@ def main() -> None:
         sampler.set_epoch(epoch)
         anchor_stream.set_epoch(epoch)
         model.train()
+        bare_model.set_temperature(temperature_schedule(curriculum_epoch))
         phase = set_training_phase(bare_model, curriculum_epoch)
         if phase != 'end_to_end_unfrozen' and vista_base_module is not None:
             vista_base_module.eval()
@@ -552,6 +575,7 @@ def main() -> None:
             if rank == 0:
                 # Batch details remain in the local SLURM log, never W&B.
                 print(json.dumps(dict(event='step',epoch=epoch+1,step=step,global_step=global_step,
+                    temperature=float(bare_model.mask_temperature),
                     case_id=batch['case_id'],phase=phase,total=float(losses.total),
                     semantic=losses.mean('semantic'),missing_nodule=losses.mean('missing_nodule'),
                     nodule=losses.mean('nodule'),risk=losses.mean('risk'),grad_norm=total_grad,
@@ -630,5 +654,18 @@ def main() -> None:
         dist.destroy_process_group()
 
 
+@record
+def run_main() -> None:
+    """Keep the original worker error even when a library replaces excepthook."""
+    try:
+        main()
+    except BaseException:
+        # Write before W&B/DDP shutdown hooks run; torchrun also records the
+        # exception in its per-rank error.json for the parent process.
+        traceback.print_exc(file=sys.__stderr__)
+        sys.__stderr__.flush()
+        raise
+
+
 if __name__ == '__main__':
-    main()
+    run_main()

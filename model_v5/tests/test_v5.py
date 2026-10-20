@@ -237,6 +237,7 @@ class V5Tests(unittest.TestCase):
     def test_checkpoint_loader_uses_cnn_without_medicalnet(self):
         from back_prop.evaluate.eval_package.inference import load_joint_model
         m,b=tiny()
+        m.set_temperature(.1)
         cfg=dict(window_size=(8,8,8),screen_shape=(8,8,8),roi_shape=(8,8,8),num_queries=4,
             detr_hidden_dim=16,detr_coarse_shape=(4,4,4),detr_nheads=4,detr_encoder_layers=1,
             detr_decoder_layers=1,vista_feature_dim=1,context_channels=2,refiner_base=2,
@@ -252,6 +253,8 @@ class V5Tests(unittest.TestCase):
                 a=m(b['image'],image_hu=b['image_hu'],object_threshold=0.)
                 c=restored(b['image'],image_hu=b['image_hu'],object_threshold=0.)
             torch.testing.assert_close(a.semantic_features,c.semantic_features,rtol=0,atol=0)
+            self.assertEqual(float(restored.mask_temperature), float(m.mask_temperature))
+            torch.testing.assert_close(a.fine_mask_probabilities,c.fine_mask_probabilities,rtol=0,atol=0)
 
     def test_collapse_is_rejected(self):
         with self.assertRaisesRegex(RuntimeError,'Near-constant'):

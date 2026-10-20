@@ -42,7 +42,8 @@ for argument in "$@"; do
         --restart-from|--init-v2|--resume|--prepare-resume|--restart-from=*|--init-v2=*|--resume=*|--prepare-resume=*) INITIAL=() ;;
     esac
 done
-"$PYTHON" -m torch.distributed.run --standalone --nproc_per_node=4 -m back_prop.model_v5.train \
+"$PYTHON" -m torch.distributed.run --standalone --nproc_per_node=4 \
+    --log-dir "$OUTPUT/torchrun" -m back_prop.model_v5.train \
     --output-dir "$OUTPUT" --epochs 18 --window-size 128 128 128 \
     --amp-dtype bfloat16 --semantic-roi-size 64 --roi-shape 128 128 128 \
     --sparsity 5 --coefficient-bound 5 --pool-size 30 --beam 10 --gap 0.05 \

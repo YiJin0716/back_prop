@@ -189,7 +189,9 @@ def evaluate_case(model, case, *, annotations=None, object_threshold=None,
         if not torch.isfinite(logits).all():
             raise ValueError("Non-finite predicted segmentation logits")
         valid = output.roi_valid[i].detach().cpu().numpy().astype(bool)
-        probability = _numpy(logits.sigmoid()) * valid
+        # V5 exports the same annealed mask used by its diagnostic branches.
+        # Older outputs retain their historical raw segmentation probabilities.
+        probability = _numpy((logits / getattr(output, 'mask_temperature', 1.0)).sigmoid()) * valid
         origin = tuple(output.crop_origins[i].tolist())
         predictions.append(PredictedNodule(
             int(query), MaskCrop((probability >= mask_threshold) & valid, origin),
@@ -218,7 +220,9 @@ def evaluate_case(model, case, *, annotations=None, object_threshold=None,
         consensus_min_votes=annotations.min_votes, ground_truth_used_for_prediction=False,
         bank_unchanged=True if bank is not None else None, mask_threshold=mask_threshold,
         diagnostic_mask_temperature=float(temperature),
-        segmentation_probability="sigmoid(raw fine_mask_logits); padded voxels excluded",
+        segmentation_probability=("sigmoid(fine_mask_logits / mask_temperature); padded voxels excluded"
+                                  if hasattr(output, 'mask_temperature') else
+                                  "sigmoid(raw fine_mask_logits); padded voxels excluded"),
         object_threshold=float(model.inference_object_threshold if object_threshold is None else object_threshold),
         window_count=int(output.window_count), axis_order="canonical XYZ",
         gt_includes_indeterminate=True, endpoint="LIDC reader-derived malignancy, not pathology",

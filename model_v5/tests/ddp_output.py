@@ -20,11 +20,13 @@ from back_prop.model_v5.tests.test_v5 import tiny
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--detector-kind',choices=('legacy','mask_guided','native_seeded'),default='legacy')
+    parser.add_argument('--mask-temperature',type=float,default=1.)
     args=parser.parse_args()
     torch.set_num_threads(1)
     dist.init_process_group('gloo', timeout=timedelta(seconds=60))
     rank, world = dist.get_rank(), dist.get_world_size()
     bare, batch = tiny(detector_kind=args.detector_kind)
+    bare.set_temperature(args.mask_temperature)
     if args.detector_kind=='native_seeded':
         with torch.no_grad():bare.segmenter.scale.fill_(20.)
     bare.use_checkpoint = True

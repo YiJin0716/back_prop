@@ -1,0 +1,11 @@
+{
+  "command": [
+    "sbatch",
+    "--parsable",
+    "back_prop/evaluate/every_CT/run.sbatch"
+  ],
+  "submitted_unix": 1792468358.0702682,
+  "returncode": 0,
+  "stdout": "13065180",
+  "stderr": ""
+}

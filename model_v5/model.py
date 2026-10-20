@@ -1,5 +1,6 @@
 """V5 geometry, ordinary 3-D CNN semantics and prediction-only late ROI routing."""
 from dataclasses import dataclass
+import math
 import torch
 from torch import Tensor
 from torch.utils.checkpoint import checkpoint
@@ -25,6 +26,12 @@ class WholeCTOutputV5(WholeCTOutputV3):
     semantic_supervision_valid: Tensor
     fine_soft_dice: Tensor
     anchor_probabilities: Tensor
+    mask_temperature: float = 1.0
+
+    @property
+    def fine_mask_probabilities(self):
+        """Final soft masks; raw logits remain available for segmentation loss."""
+        return (self.fine_mask_logits.float() / self.mask_temperature).sigmoid() * self.roi_valid
 
 
 # DDP's unused-parameter search traverses dataclasses, but its output sink uses
@@ -67,11 +74,17 @@ class WholeCTJointModelV5(WholeCTJointModelV3):
         self.refiner_conditioning=(torch.nn.Parameter(torch.zeros(2))
                                    if detector_kind=='native_seeded' else None)
         self.rashomon = ResidualRiskBank(baseline_l2=baseline_l2, **(bank_config or {}))
-        # V3's original sigmoid temperature is fixed for every epoch and saved.
+        # Checkpoints retain the inference temperature; legacy V5 uses 1.0.
         self.register_buffer('mask_temperature', torch.tensor(1.0))
         if not 0 <= semantic_min_dice <= 1:
             raise ValueError('semantic_min_dice must be in [0, 1]')
         self.semantic_min_dice = float(semantic_min_dice)
+
+    def set_temperature(self, temperature):
+        value = float(temperature)
+        if not math.isfinite(value) or value <= 0:
+            raise ValueError('Mask temperature must be positive and finite')
+        self.mask_temperature.fill_(value)
 
     def select_detection_queries(self, object_logits, mask_logits, threshold=None):
         threshold = self.inference_object_threshold if threshold is None else threshold
@@ -257,6 +270,7 @@ class WholeCTJointModelV5(WholeCTJointModelV3):
             fine_logit = (coarse_roi + delta.float()) * valid_gpu + (-12.0) * (
                 1.0 - valid_gpu
             )
+            diagnostic_logit = fine_logit.float() / self.mask_temperature
             # Parallel diagnostics: use original HU for radiomics and the
             # windowed network CT for CNN, both on the same soft mask.
             # Radiomics is a detached baseline only, never a segmentation objective.
@@ -266,9 +280,9 @@ class WholeCTJointModelV5(WholeCTJointModelV3):
                 else:
                     hu_patch, _, _ = integer_crop(image_hu, center, self.roi_shape)
                     hu_gpu = hu_patch.unsqueeze(0).to(self.device, non_blocking=True)
-                    radiomics = self.radiomics(hu_gpu, fine_logit.detach(), valid_gpu)
+                    radiomics = self.radiomics(hu_gpu, diagnostic_logit.detach(), valid_gpu)
             if not skip_diagnostics:
-                semantic_inputs.append((ct_gpu, fine_logit, valid_gpu))
+                semantic_inputs.append((ct_gpu, diagnostic_logit, valid_gpu))
 
             origins.append(origin.to(self.device))
             valid_masks.append(valid_gpu[0, 0].bool())
@@ -308,6 +322,7 @@ class WholeCTJointModelV5(WholeCTJointModelV3):
             object_logits.new_empty((0, len(RADIOMICS_NAMES)), dtype=torch.float32))
         # Mask quality gates downstream supervision, never segmentation losses,
         # ROI routing, or inference. Empty/incorrect masks must still be corrected.
+        # Keep this gate on raw logits so annealing alone cannot enable supervision.
         with torch.no_grad():
             prob = fine_mask_logits.float().sigmoid() * roi_loss_valid
             target = fine_target_masks.float() * roi_loss_valid
@@ -373,6 +388,7 @@ class WholeCTJointModelV5(WholeCTJointModelV3):
             scan_path_valid = scan_path_valid and covered == set(range(len(batch['target_boxes'])))
 
         return WholeCTOutputV5(
+            mask_temperature=float(self.mask_temperature),
             radiomics_logits=radiomics_logits,
             semantic_correction_logits=semantic_correction_logits,
             residual_targets=residual_targets,
